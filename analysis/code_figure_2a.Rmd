@@ -1,0 +1,53 @@
+---
+title: "Code_Figure_2a"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Figure 2a replication
+Data used: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv"
+
+The given tab-delimited file was imported into excel then exported as a csv.
+
+```{r import matrix, echo=FALSE}
+
+setwd("C:/Users/Zoheb/Desktop/He Lab-R Files/C031-Cg-OSR-regulon/data")
+
+#allow fread function and data.table structure
+library(data.table)
+#allow heatmap functions
+library(NMF)
+
+#read in data from csv
+fread("normalized_data_oxidative_stress_Candida_glabrata.txt.csv") -> unfiltered_data
+
+#Remove header columns and rows to get raw data
+unfiltered_data[-1,-1] -> filtered_data
+
+#how to remove nulls from a single column
+filtered_data <- filtered_data[filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr` != 'null',]
+
+#working on removing nulls from all columns
+#for (col in names(filtered_data)){
+  # Remove rows with null values to allow for heatmap
+ # filtered_data <- filtered_data[filtered_data[[col]] != 'null',]
+#}
+
+
+#converts values checked by str() from factors to numerics for heatmap
+filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`<-as.numeric(as.character(filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`))
+
+#Generate basic Heatmap (Note havent used aheatmap() function yet)
+x<-heatmap(matrix(filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`, ncol = 2), trace="n", Colv = FALSE, Rowv=FALSE,
+      cellnote = matrix(1, ncol = 2), notecol = 1, scale = "none",
+      dendrogram = "none", labCol = "", labRow = "", cexRow = 0.75)
+
+
+print(x)
+
+```
+
