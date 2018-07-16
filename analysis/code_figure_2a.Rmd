@@ -13,6 +13,7 @@ library(NMF)
 
 #Reference data/output directories
 data_dir <- "../data"
+analysis_dir <- "../analysis"
 output_dir <- "../output"
 
 
@@ -23,39 +24,62 @@ Data used: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv"
 
 The given tab-delimited file was imported into excel then exported as a csv.
 
+####Legend - Based on .sdrf file
+
+| Column | Sample 1 | Sample 2 |
+| --------- | ----------- | ----------- |
+| 1  | WT stressed | WT unstressed |
+| 2  | WT stressed | Skn7 stressed |
+| 3  | WT stressed | Yap1 stressed |
+| 4  | Yap1Skn7 stressed | Yap1Skn7 unstressed |
+
+
 ```{r read data, echo=FALSE}
 
 #Get working directory for fread functionality
 setwd(data_dir)
 
 #read in data from csv
-fread("normalized_data_oxidative_stress_Candida_glabrata.txt.csv") -> unfiltered_data
+fread("normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data
 
 ```
 
 ```{r format csv, echo=FALSE}
 
 #Remove header columns and rows to get raw data
-unfiltered_data[-1,-1] -> filtered_data
+unfiltered_data[-1,] -> filtered_data
+
+#attampting to set row names but ran into issue ??? - fix
+#row.names(filtered_data) <- make.names(filtered_data$`Scan REF`, unique=TRUE)
+
+#remove column with names
+filtered_data<-filtered_data[,-1]
 
 #Remove SD and CV columns since not needed for heatmap
 filtered_data <- filtered_data[,-c(2,3,5,6,8,9,11,12,14,15,17,18)]
 
-#how to remove nulls from a single column and only select for induction above 3x
-filtered_data <- filtered_data[filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr` != 'null',]
-filtered_data <- filtered_data[filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr` >=3.0,]
+#Remove Menadione column since not needed for figure 2a
+filtered_data <- filtered_data[,-c(3,5)]
 
-#working on removing nulls from all columns
-#for (col in names(filtered_data)){
-  # Remove rows with null values to allow for heatmap
- # filtered_data <- filtered_data[filtered_data[[col]] != 'null',]
+#Rearrange columns to match legend
+filtered_data <- filtered_data[,c(4,3,2,1)]
+
+#converts values checked by str() from factors to numerics for heatmap 
+filtered_data[, names(filtered_data) := lapply(.SD, as.numeric)]
+
+# Only keep rows where atleast one column has >3x induction/repression
+filtered_data <- filtered_data[abs(filtered_data$`E01-08-dd.gpr;E01-10-dd.gpr`) >3 | abs(filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`) >3 | abs(filtered_data$`htu_skn04mM_2.gpr;htu_skn04mM_add.gpr`) >3 | abs(filtered_data$`E01-07-WT.gpr;E01-09-WT.gpr`) >3,] 
+
+#convert to matrix for easy use of heatmap
+filtered_data <- data.matrix(filtered_data)
+
+#Testing
+#for (val in filtered_data$`E01-08-dd.gpr;E01-10-dd.gpr`){
+#  print(val)
 #}
 
 
-#converts values checked by str() from factors to numerics for heatmap
-filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`<-as.numeric(as.character(filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`))
-
-
+#Testing
 #print(filtered_data)
 
 ```
@@ -67,10 +91,7 @@ filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`<-as.numeric(as.characte
 options(warn = -1)
 
 
-
-#Generate basic Heatmap (Note havent used aheatmap() function yet)
-x<-heatmap(matrix(filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`, ncol = 2), trace="n", Colv = FALSE, Rowv=FALSE,
-      cellnote = matrix(1, ncol = 2), notecol = 1, scale = "none",
-      dendrogram = "none", labCol = "", labRow = "", cexRow = 0.75)
+#Generate basic Heatmap (still need to add legend, fix row names problem, fix label size)
+filtered_heatmap <- heatmap(filtered_data, Rowv=NA, Colv=NA, col = heat.colors(256), scale="column", margins=c(10,20))
 
 ```
