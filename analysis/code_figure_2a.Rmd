@@ -1,6 +1,12 @@
 ---
 title: "Code_Figure_2a"
-output: html_document
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  html_notebook:
+    theme: united
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -9,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #allow fread function and data.table structure
 library(data.table)
 #allow heatmap functions
-library(NMF)
+library(gplots)
 
 #Reference data/output directories
 data_dir <- "../data"
@@ -19,12 +25,20 @@ output_dir <- "../output"
 
 ```
 
-## Figure 2a replication
-Data used: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv"
+## Goal
 
-The given tab-delimited file was imported into excel then exported as a csv.
+The goal of this analysis is to use the normalized data set provided to attempt to reproduce the results as well as identify any abiguity in the methods described in the original study.
 
-####Legend - Based on .sdrf file
+## Methods Used
+
+The data was imported from the given tab-delmited file provided in the paper and exported as a .csv file for use in R: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv". The analysis was done by formatting the data in the .csv. 
+
+Initially, all columns unrelated to the direct heatmap production were removed. Following this, only rows containing a 8x induction or repression were preserved. In the study this detail was left ambiguous. To instead use a threshold of 3x induction/repression, a value of 1.584 would be used below, resulting in 335 genes being found instead of 29 in this analysis and the 38 in the paper.
+
+Once the genes were identified, the values were put into a matrix. To account for NA values in the data provided, a modified distance function was used so clustering would be an option in the heatmap. The modified function replaces NA values in the dataset with 1.1 times the max euclidean distance allowable. The benefit of this is to allow the clustering function based on euclidean distances to work while also letting the NA values get split from the rest of the data quickly. The result of this produces 3 distinct clusters of genes which supports one of the goals of the study. The clustering done in the paper itself wasn't explicity stated. Lastly, a dendogram was provided to further show relationships between induced/repressed genes.
+
+
+##Legend - Based on .sdrf file
 
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
@@ -36,11 +50,8 @@ The given tab-delimited file was imported into excel then exported as a csv.
 
 ```{r read data, echo=FALSE}
 
-#Get working directory for fread functionality
-setwd(data_dir)
-
 #read in data from csv
-fread("normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data
+fread("../data/normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data
 
 ```
 
@@ -49,7 +60,7 @@ fread("normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=g
 #Remove header columns and rows to get raw data
 unfiltered_data[-1,] -> filtered_data
 
-#attampting to set row names but ran into issue ??? - fix
+#attampting to set row names but ran into issue ??? - fix // fixable now since heatmap working
 #row.names(filtered_data) <- make.names(filtered_data$`Scan REF`, unique=TRUE)
 
 #remove column with names
@@ -67,7 +78,7 @@ filtered_data <- filtered_data[,c(4,3,2,1)]
 #converts values checked by str() from factors to numerics for heatmap 
 filtered_data[, names(filtered_data) := lapply(.SD, as.numeric)]
 
-# Only keep rows where atleast one column has >3x induction/repression
+# Only keep rows where atleast one column has >8x induction/repression, 3 is used here since data was log-base 2 transformed
 filtered_data <- filtered_data[abs(filtered_data$`E01-08-dd.gpr;E01-10-dd.gpr`) >3 | abs(filtered_data$`htu_yap04mM_2_1.gpr;htu_yap04mM_add1.gpr`) >3 | abs(filtered_data$`htu_skn04mM_2.gpr;htu_skn04mM_add.gpr`) >3 | abs(filtered_data$`E01-07-WT.gpr;E01-09-WT.gpr`) >3,] 
 
 #convert to matrix for easy use of heatmap
@@ -80,7 +91,8 @@ filtered_data <- data.matrix(filtered_data)
 
 
 #Testing
-#print(filtered_data)
+#print(names(filtered_data))
+#print(filtered_data[,2:3])
 
 ```
 
@@ -90,8 +102,24 @@ filtered_data <- data.matrix(filtered_data)
 #Messing around with code; not final
 options(warn = -1)
 
+# Replace the old distance function to account for NA values in dataset
+dist_no_na <- function(mat) {
+    edist <- dist(mat)
+    edist[which(is.na(edist))] <- max(edist, na.rm=TRUE) * 1.1 
+    return(edist)
+}
 
-#Generate basic Heatmap (still need to add legend, fix row names problem, fix label size)
-filtered_heatmap <- heatmap(filtered_data, Rowv=NA, Colv=NA, col = heat.colors(256), scale="column", margins=c(10,20))
+#Heatmap with legend - add row names
+heatmap.2(filtered_data,
+  main = "Fig. 2a", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(12,9),     # widens margins around plot
+  col=redgreen(500),       # use on color palette defined earlier
+  dendrogram="row",     # only draw a row dendrogram
+  Colv="NA",
+  distfun=dist_no_na)            # needed for NA values to not interfere in heatmap
+
 
 ```
