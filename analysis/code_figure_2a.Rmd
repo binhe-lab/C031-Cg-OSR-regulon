@@ -43,15 +43,18 @@ Once the genes were identified, the values were put into a matrix. To account fo
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
 | 1  | WT stressed | WT unstressed |
-| 2  | WT stressed | Skn7 stressed |
-| 3  | WT stressed | Yap1 stressed |
-| 4  | Yap1Skn7 stressed | Yap1Skn7 unstressed |
+| 2  | WT stressed | skn7$\Delta$ stressed |
+| 3  | WT stressed | yap1$\Delta$ stressed |
+| 4  | yap1skn7$\Delta$ stressed | yap1skn7$\Delta$ unstressed |
 
 
 ```{r read data, echo=FALSE}
 
-#read in data from csv
+#read in data from csv for non-glucose data
 fread("../data/normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data
+
+#read in data from csv for glucose data
+fread("../data/normalized_Cg_glucose_data.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data_glucose
 
 ```
 
@@ -61,12 +64,16 @@ options(warn = -1)
 
 #Remove header columns and rows to get raw data
 unfiltered_data[-1,] -> filtered_data
+unfiltered_data_glucose[-1,] -> filtered_data_glucose
 
 #Remove any rows with NAs in them
 filtered_data <- filtered_data[complete.cases(filtered_data), ]
 
 #Remove SD and CV columns since not needed for heatmap below - kept CV rows
 filtered_data <- filtered_data[,-c(3,6,8,9,10,12,14,15,16,18)]
+
+#For glucose data, only keep the single Mean value column and names
+filtered_data_glucose <- filtered_data_glucose[,c(1,5)]
 
 #This line is just used to make the next step easier, not necessary; see note below about bug
 names(filtered_data) <- c("Genes", "4", "4 CV", "3", "3 CV", "2", "2 CV", "1", "1 CV")
@@ -97,12 +104,25 @@ filtered_data <- filtered_data[,-c(3,5,7,9)]
 #Save the list of names for later use in labeling
 genenames <- filtered_data$`Genes`
 
+#Only keep glucose rows that have the final genenames
+filtered_data_glucose <- filtered_data_glucose[filtered_data_glucose$`Scan REF` %in% genenames,]
+
 #convert to matrix for easy use of heatmap
 filtered_data <- data.matrix(filtered_data)
 
+#Keep list of glucose genes
+genenames_glucose <- filtered_data_glucose$`Scan REF`
+
+
+filtered_data_glucose <- filtered_data_glucose[,-1]
+
+#Convert glucose values to matrix for easy use of heatmap
+#filtered_data_glucose <- as.numeric(filtered_data_glucose[,2])
+filtered_data_glucose <- data.matrix(filtered_data_glucose)
+
 #Testing
-#print(names(filtered_data))
-print(filtered_data)
+print(filtered_data_glucose)
+#print(nrow(filtered_data))
 
 ```
 
@@ -122,17 +142,51 @@ dist_no_na <- function(mat) {
 #Assign color gradient for heatmap
 colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
 
-#Heatmap with legend - add row names
-#Note: I am not sure how to approach the NA data issue since it causes blank areas in my heatmap but doesn't seem to affect the data in the paper --- come back and look at this after finishing other parts
+#Heatmap with legend 
 heatmap.2(filtered_data[,2:ncol(filtered_data)],
   labRow = genenames,
-  main = "Fig. 2a", # heat map title
+  main = "Fig. 2a",     # heat map title
   notecol="black",      # change font color of cell labels to black
   density.info="none",  # turns off density plot inside color legend
   trace="none",         # turns off trace lines inside the heat map
-  margins =c(1,8),     # widens margins around plot
-  col=colorway,       # use on color palette defined earlier
-  dendrogram="none",     # only draw a row dendrogram
+  margins =c(1,8),      # widens margins around plot
+  col=colorway,         # use on color palette defined earlier
+  dendrogram="none",    # only draw a row dendrogram
+  Colv="NA",
+  distfun=dist_no_na,   # needed for NA values to not interfere in heatmap
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+
+
+```
+
+## Heatmap of Figure 2a - Glucose - fix error requiring 2 columns by merging
+
+```{r generate heatmaps and print for glucose, echo=FALSE}
+#Turn off warnings for readablility
+options(warn = -1)
+
+# Replace the old distance function to account for NA values in dataset
+dist_no_na <- function(mat) {
+    edist <- dist(mat)
+    edist[which(is.na(edist))] <- max(edist, na.rm=TRUE) * 1.1 
+    return(edist)
+}
+
+#Assign color gradient for heatmap
+colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
+
+#Heatmap with legend 
+heatmap.2(filtered_data_glucose,
+  labRow = genenames_glucose,
+  main = "Fig. 2a - Glucose",     # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(1,8),      # widens margins around plot
+  col=colorway,         # use on color palette defined earlier
+  dendrogram="none",    # only draw a row dendrogram
   Colv="NA",
   distfun=dist_no_na,   # needed for NA values to not interfere in heatmap
   cexCol = 1,

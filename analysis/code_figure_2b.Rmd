@@ -37,8 +37,8 @@ The data was imported from the given tab-delmited file provided in the paper and
 
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
-| 1  | WT Menadione Stress | WT unstressed |
-| 2  | yap1skn7 Menadione Stress | yap1skn7 Unstressed |
+| 1  | WT Menadione Stress | WT Unstressed |
+| 2  | yap1skn7$\Delta$ Menadione Stress | yap1skn7$\Delta$ Unstressed |
 
 ```{r read data, echo=FALSE}
 
@@ -90,7 +90,7 @@ filtered_data <- data.matrix(filtered_data)
 
 #Testing
 #print(names(filtered_data))
-print(filtered_data)
+#print(filtered_data)
 
 ```
 
@@ -110,11 +110,10 @@ dist_no_na <- function(mat) {
 #Assign color gradient for heatmap
 colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
 
-#Heatmap with legend - add row names
-#Note: I am not sure how to approach the NA data issue since it causes blank areas in my heatmap but doesn't seem to affect the data in the paper --- come back and look at this after finishing other parts
+#Heatmap with legend
 heatmap.2(filtered_data[,2:ncol(filtered_data)],
   labRow = genenames,
-  main = "Fig. 2a", # heat map title
+  main = "Fig. 2b", # heat map title
   notecol="black",      # change font color of cell labels to black
   density.info="none",  # turns off density plot inside color legend
   trace="none",         # turns off trace lines inside the heat map
