@@ -1,5 +1,5 @@
 ---
-title: "Code_Figure_2a"
+title: "Code_Figure_2b"
 output:
   html_document:
     df_print: paged
@@ -33,20 +33,12 @@ The goal of this analysis is to use the normalized data set provided to attempt 
 
 The data was imported from the given tab-delmited file provided in the paper and exported as a .csv file for use in R: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv". The analysis was done by formatting the data in the .csv. 
 
-Initially, all columns unrelated to the direct heatmap production were removed. Following this, only rows containing a 8x induction or repression were preserved. In the study this detail was left ambiguous. To instead use a threshold of 3x induction/repression, a value of 1.584 would be used below, resulting in 335 genes being found instead of 29 in this analysis and the 38 in the paper.
-
-Once the genes were identified, the values were put into a matrix. To account for NA values in the data provided, a modified distance function was used so clustering would be an option in the heatmap. The modified function replaces NA values in the dataset with 1.1 times the max euclidean distance allowable. The benefit of this is to allow the clustering function based on euclidean distances to work while also letting the NA values get split from the rest of the data quickly. The result of this produces 3 distinct clusters of genes which supports one of the goals of the study. The clustering done in the paper itself wasn't explicity stated. Lastly, a dendogram was provided to further show relationships between induced/repressed genes.
-
-
 ##Legend - Based on .sdrf file
 
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
-| 1  | WT stressed | WT unstressed |
-| 2  | WT stressed | Skn7 stressed |
-| 3  | WT stressed | Yap1 stressed |
-| 4  | Yap1Skn7 stressed | Yap1Skn7 unstressed |
-
+| 1  | WT Menadione Stress | WT unstressed |
+| 2  | yap1skn7 Menadione Stress | yap1skn7 Unstressed |
 
 ```{r read data, echo=FALSE}
 
@@ -65,17 +57,14 @@ unfiltered_data[-1,] -> filtered_data
 #Remove any rows with NAs in them
 filtered_data <- filtered_data[complete.cases(filtered_data), ]
 
-#Remove SD and CV columns since not needed for heatmap below - kept CV rows
-filtered_data <- filtered_data[,-c(3,6,8,9,10,12,14,15,16,18)]
+#Remove SD and CV columns since not needed for heatmap below - keep 8,10,14,16 since Mena columns
+filtered_data <- filtered_data[,-c(2,3,4,5,6,7,9,11,12,13,15,17,18,19)]
 
 #This line is just used to make the next step easier, not necessary; see note below about bug
-names(filtered_data) <- c("Genes", "4", "4 CV", "3", "3 CV", "2", "2 CV", "1", "1 CV")
+names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV")
 
 #extra column created to work around bug mentioned below
 filtered_data$dup <- filtered_data$`1`
-
-#Rearrange columns to match legend
-filtered_data <- filtered_data[,c(1,8,9,6,7,4,5,2,3,10)]
 
 #converts values checked by str() from factors to numerics for heatmap 
 #There is a bug here where the first column (2 in this case) becomes all NA - col 'dup' from above is used as an extra column that gets the values from the column to the left of it, while the second column gets nullified so that all the important columns are ok - second column will now get removed in next step and everything will be renamed accordingly to the values in the .csv
@@ -84,15 +73,14 @@ filtered_data[, 2:ncol(filtered_data) := lapply(.SD, as.numeric)]
 #remove nullified column
 filtered_data <- filtered_data[, -2]
 
-#Get all the correct column names in order
-names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV", "3", "3 CV", "4", "4 CV")
-
+#Reset names to correct values
+names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV")
 
 # Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
-filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1) | ((abs(filtered_data$`3`) > 1.59) & filtered_data$`3 CV`<1) | ((abs(filtered_data$`4`) > 1.59) & filtered_data$`4 CV`<1),] 
+filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1),]
 
 #Remove CV columns for heatmap analysis
-filtered_data <- filtered_data[,-c(3,5,7,9)]
+filtered_data <- filtered_data[,-c(3,5)]
 
 #Save the list of names for later use in labeling
 genenames <- filtered_data$`Genes`
@@ -106,7 +94,7 @@ print(filtered_data)
 
 ```
 
-## Heatmap of Figure 2a
+## Heatmap of Figure 2b
 
 ```{r generate heatmaps and print, echo=FALSE}
 #Turn off warnings for readablility
@@ -141,3 +129,4 @@ heatmap.2(filtered_data[,2:ncol(filtered_data)],
 
 
 ```
+
