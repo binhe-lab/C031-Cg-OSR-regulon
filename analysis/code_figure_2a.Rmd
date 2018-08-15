@@ -16,6 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(data.table)
 #allow heatmap functions
 library(gplots)
+#allow merging data tables
+library(dplyr)
 
 #Reference data/output directories
 data_dir <- "../data"
@@ -38,7 +40,7 @@ Initially, all columns unrelated to the direct heatmap production were removed. 
 Once the genes were identified, the values were put into a matrix. To account for NA values in the data provided, a modified distance function was used so clustering would be an option in the heatmap. The modified function replaces NA values in the dataset with 1.1 times the max euclidean distance allowable. The benefit of this is to allow the clustering function based on euclidean distances to work while also letting the NA values get split from the rest of the data quickly. The result of this produces 3 distinct clusters of genes which supports one of the goals of the study. The clustering done in the paper itself wasn't explicity stated. Lastly, a dendogram was provided to further show relationships between induced/repressed genes.
 
 
-##Legend - Based on .sdrf file
+##Legend - Based on .sdrf file & Heatmap 2a
 
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
@@ -46,6 +48,7 @@ Once the genes were identified, the values were put into a matrix. To account fo
 | 2  | WT stressed | skn7$\Delta$ stressed |
 | 3  | WT stressed | yap1$\Delta$ stressed |
 | 4  | yap1skn7$\Delta$ stressed | yap1skn7$\Delta$ unstressed |
+| 5  | WT Glucose starvation | WT unstressed |
 
 
 ```{r read data, echo=FALSE}
@@ -66,9 +69,6 @@ options(warn = -1)
 unfiltered_data[-1,] -> filtered_data
 unfiltered_data_glucose[-1,] -> filtered_data_glucose
 
-#Remove any rows with NAs in them
-filtered_data <- filtered_data[complete.cases(filtered_data), ]
-
 #Remove SD and CV columns since not needed for heatmap below - kept CV rows
 filtered_data <- filtered_data[,-c(3,6,8,9,10,12,14,15,16,18)]
 
@@ -84,6 +84,18 @@ filtered_data$dup <- filtered_data$`1`
 #Rearrange columns to match legend
 filtered_data <- filtered_data[,c(1,8,9,6,7,4,5,2,3,10)]
 
+#Rename glucose columns so you can merge
+names(filtered_data_glucose) <- c("Genes", "Glucose Data")
+
+#Merge the two data tables
+filtered_data <- inner_join(filtered_data, filtered_data_glucose, by="Genes")
+
+#convert joined data frame back to data table
+filtered_data <- as.data.table(filtered_data)
+
+#Rearrange columns to match legend and account for glucose column due to bug
+filtered_data <- filtered_data[,c(1,8,9,6,7,4,5,2,3,11,10)]
+
 #converts values checked by str() from factors to numerics for heatmap 
 #There is a bug here where the first column (2 in this case) becomes all NA - col 'dup' from above is used as an extra column that gets the values from the column to the left of it, while the second column gets nullified so that all the important columns are ok - second column will now get removed in next step and everything will be renamed accordingly to the values in the .csv
 filtered_data[, 2:ncol(filtered_data) := lapply(.SD, as.numeric)]
@@ -92,8 +104,10 @@ filtered_data[, 2:ncol(filtered_data) := lapply(.SD, as.numeric)]
 filtered_data <- filtered_data[, -2]
 
 #Get all the correct column names in order
-names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV", "3", "3 CV", "4", "4 CV")
+names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV", "3", "3 CV", "4", "4 CV", "Glucose Data")
 
+#save filtered_data file for use in other .Rmd files
+save("filtered_data", file = "2a.RData")
 
 # Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
 filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1) | ((abs(filtered_data$`3`) > 1.59) & filtered_data$`3 CV`<1) | ((abs(filtered_data$`4`) > 1.59) & filtered_data$`4 CV`<1),] 
@@ -104,29 +118,19 @@ filtered_data <- filtered_data[,-c(3,5,7,9)]
 #Save the list of names for later use in labeling
 genenames <- filtered_data$`Genes`
 
-#Only keep glucose rows that have the final genenames
-filtered_data_glucose <- filtered_data_glucose[filtered_data_glucose$`Scan REF` %in% genenames,]
+#Remove any rows with NAs in them
+filtered_data <- filtered_data[complete.cases(filtered_data), ]
 
 #convert to matrix for easy use of heatmap
 filtered_data <- data.matrix(filtered_data)
 
-#Keep list of glucose genes
-genenames_glucose <- filtered_data_glucose$`Scan REF`
-
-
-filtered_data_glucose <- filtered_data_glucose[,-1]
-
-#Convert glucose values to matrix for easy use of heatmap
-#filtered_data_glucose <- as.numeric(filtered_data_glucose[,2])
-filtered_data_glucose <- data.matrix(filtered_data_glucose)
-
 #Testing
-print(filtered_data_glucose)
+#print(filtered_data)
+#print(genenames)
 #print(nrow(filtered_data))
 
 ```
 
-## Heatmap of Figure 2a
 
 ```{r generate heatmaps and print, echo=FALSE}
 #Turn off warnings for readablility
@@ -143,7 +147,7 @@ dist_no_na <- function(mat) {
 colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
 
 #Heatmap with legend 
-heatmap.2(filtered_data[,2:ncol(filtered_data)],
+fig2a <- heatmap.2(filtered_data[,2:ncol(filtered_data)],
   labRow = genenames,
   main = "Fig. 2a",     # heat map title
   notecol="black",      # change font color of cell labels to black
@@ -161,37 +165,3 @@ heatmap.2(filtered_data[,2:ncol(filtered_data)],
 
 ```
 
-## Heatmap of Figure 2a - Glucose - fix error requiring 2 columns by merging
-
-```{r generate heatmaps and print for glucose, echo=FALSE}
-#Turn off warnings for readablility
-options(warn = -1)
-
-# Replace the old distance function to account for NA values in dataset
-dist_no_na <- function(mat) {
-    edist <- dist(mat)
-    edist[which(is.na(edist))] <- max(edist, na.rm=TRUE) * 1.1 
-    return(edist)
-}
-
-#Assign color gradient for heatmap
-colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
-
-#Heatmap with legend 
-heatmap.2(filtered_data_glucose,
-  labRow = genenames_glucose,
-  main = "Fig. 2a - Glucose",     # heat map title
-  notecol="black",      # change font color of cell labels to black
-  density.info="none",  # turns off density plot inside color legend
-  trace="none",         # turns off trace lines inside the heat map
-  margins =c(1,8),      # widens margins around plot
-  col=colorway,         # use on color palette defined earlier
-  dendrogram="none",    # only draw a row dendrogram
-  Colv="NA",
-  distfun=dist_no_na,   # needed for NA values to not interfere in heatmap
-  cexCol = 1,
-  key.xlab = "Induction Values (log2 transformed)"
-)
-
-
-```

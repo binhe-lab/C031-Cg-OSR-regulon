@@ -33,12 +33,12 @@ The goal of this analysis is to use the normalized data set provided to attempt 
 
 The data was imported from the given tab-delmited file provided in the paper and exported as a .csv file for use in R: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv". The analysis was done by formatting the data in the .csv. 
 
-##Legend - Based on .sdrf file
+##Legend - Based on .sdrf file & Heatmap 2b
 
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
-| 1  | WT Menadione Stress | WT Unstressed |
-| 2  | yap1skn7$\Delta$ Menadione Stress | yap1skn7$\Delta$ Unstressed |
+| 1  | WT Menadione stress | WT unstressed |
+| 2  | yap1skn7$\Delta$ Menadione stress | yap1skn7$\Delta$ unstressed |
 
 ```{r read data, echo=FALSE}
 
@@ -53,9 +53,6 @@ options(warn = -1)
 
 #Remove header columns and rows to get raw data
 unfiltered_data[-1,] -> filtered_data
-
-#Remove any rows with NAs in them
-filtered_data <- filtered_data[complete.cases(filtered_data), ]
 
 #Remove SD and CV columns since not needed for heatmap below - keep 8,10,14,16 since Mena columns
 filtered_data <- filtered_data[,-c(2,3,4,5,6,7,9,11,12,13,15,17,18,19)]
@@ -76,11 +73,18 @@ filtered_data <- filtered_data[, -2]
 #Reset names to correct values
 names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV")
 
+#Save current variable for further analysis
+filtered_data_mena <- filtered_data
+save("filtered_data_mena", file = "2b.RData")
+
 # Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
 filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1),]
 
 #Remove CV columns for heatmap analysis
 filtered_data <- filtered_data[,-c(3,5)]
+
+#Remove any rows with NAs in them
+filtered_data <- filtered_data[complete.cases(filtered_data), ]
 
 #Save the list of names for later use in labeling
 genenames <- filtered_data$`Genes`
@@ -94,7 +98,6 @@ filtered_data <- data.matrix(filtered_data)
 
 ```
 
-## Heatmap of Figure 2b
 
 ```{r generate heatmaps and print, echo=FALSE}
 #Turn off warnings for readablility

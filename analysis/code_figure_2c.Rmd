@@ -1,0 +1,59 @@
+---
+title: "Code_Figure_2c"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  html_notebook:
+    theme: united
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#allow fread function and data.table structure
+library(data.table)
+#allow merging data tables
+library(dplyr)
+#allow for venn diagrams
+library(VennDiagram)
+
+#Reference data/output directories
+data_dir <- "../data"
+analysis_dir <- "../analysis"
+output_dir <- "../output"
+
+#Load objects from earlier analysis
+load(file = "2a.RData", verbose = FALSE)
+load(file = "2b.RData", verbose = FALSE)
+
+```
+
+##Generate initial venn diagram
+
+There were 118 genes observed under the wt 0.4mM H~2~O~2~ condition with a filter applied of >2x induction. Under the wt 0.1mM Menadione condition, there were 136 genes found. The observations took place after all rows with NA values were ommitted. There was an overlap of 28 genes.
+
+```{r compare, echo=FALSE}
+print(nrow(filtered_data))
+
+#filter wt H2O2 data
+filtered_data <- filtered_data[(((filtered_data$`1`) >1) & filtered_data$`1 CV` <1),]
+
+#filter mena data
+filtered_data_mena <- filtered_data_mena[(((filtered_data_mena$`1`) >1) & filtered_data_mena$`1 CV` <1),]
+
+#check for overlap between sets
+overlap_data <- inner_join(filtered_data, filtered_data_mena, by = "Genes")
+
+#draw initial venn diagram
+draw.pairwise.venn(area1 = nrow(filtered_data), area2 = nrow(filtered_data_mena), cross.area = nrow(overlap_data), category = c("0.4mM H2O2 wt", "0.1mM Menadione wt"), fill = "yellow")
+
+#Testing
+print(filtered_data_mena)
+print(nrow(filtered_data))
+print(nrow(filtered_data_mena))
+print(nrow(overlap_data))
+
+
+```
