@@ -25,8 +25,12 @@ analysis_dir <- "../analysis"
 output_dir <- "../output"
 
 #Load objects from earlier analysis
-load(file = "2a.RData", verbose = FALSE)
-load(file = "2b.RData", verbose = FALSE)
+load(file = "filtered_data.RData")
+load(file = "filtered_data_final.RData")
+load(file = "filtered_data_mena.RData")
+load(file = "filtered_data_mena_final.RData")
+load(file = "genenames.RData")
+load(file = "genenames_mena.RData")
 
 ```
 

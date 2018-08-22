@@ -27,7 +27,7 @@ output_dir <- "../output"
 
 ```
 
-## Goal
+## Goal 2a
 
 The goal of this analysis is to use the normalized data set provided to attempt to reproduce the results as well as identify any abiguity in the methods described in the original study.
 
@@ -44,14 +44,14 @@ Once the genes were identified, the values were put into a matrix. To account fo
 
 | Column | Sample 1 | Sample 2 |
 | --------- | ----------- | ----------- |
-| 1  | WT stressed | WT unstressed |
-| 2  | WT stressed | skn7$\Delta$ stressed |
-| 3  | WT stressed | yap1$\Delta$ stressed |
-| 4  | yap1skn7$\Delta$ stressed | yap1skn7$\Delta$ unstressed |
+| 1  | WT H~2~O~2~ stressed | WT unstressed |
+| 2  | WT H~2~O~2~ stressed | skn7$\Delta$ H~2~O~2~ stressed |
+| 3  | WT H~2~O~2~ stressed | yap1$\Delta$ H~2~O~2~ stressed |
+| 4  | yap1$\Delta$skn7$\Delta$ H~2~O~2~ stressed | yap1$\Delta$skn7$\Delta$ unstressed |
 | 5  | WT Glucose starvation | WT unstressed |
 
 
-```{r read data, echo=FALSE}
+```{r read data 1, echo=FALSE}
 
 #read in data from csv for non-glucose data
 fread("../data/normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data
@@ -61,7 +61,7 @@ fread("../data/normalized_Cg_glucose_data.csv",  na.strings=getOption("datatable
 
 ```
 
-```{r format csv, echo=FALSE}
+```{r format csv 1, echo=FALSE}
 #Turn off warnings for readablility
 options(warn = -1)
 
@@ -107,7 +107,7 @@ filtered_data <- filtered_data[, -2]
 names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV", "3", "3 CV", "4", "4 CV", "Glucose Data")
 
 #save filtered_data file for use in other .Rmd files
-save("filtered_data", file = "2a.RData")
+save(filtered_data, file = "filtered_data.RData")
 
 # Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
 filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1) | ((abs(filtered_data$`3`) > 1.59) & filtered_data$`3 CV`<1) | ((abs(filtered_data$`4`) > 1.59) & filtered_data$`4 CV`<1),] 
@@ -124,6 +124,10 @@ filtered_data <- filtered_data[complete.cases(filtered_data), ]
 #convert to matrix for easy use of heatmap
 filtered_data <- data.matrix(filtered_data)
 
+filtered_data_final <- filtered_data
+save(filtered_data_final, file = "filtered_data_final.RData")
+save(genenames, file = "genenames.RData")
+
 #Testing
 #print(filtered_data)
 #print(genenames)
@@ -132,7 +136,7 @@ filtered_data <- data.matrix(filtered_data)
 ```
 
 
-```{r generate heatmaps and print, echo=FALSE}
+```{r generate heatmaps and print 1, echo=FALSE}
 #Turn off warnings for readablility
 options(warn = -1)
 
@@ -164,4 +168,3 @@ fig2a <- heatmap.2(filtered_data[,2:ncol(filtered_data)],
 
 
 ```
-
