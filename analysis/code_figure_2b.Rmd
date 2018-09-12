@@ -119,7 +119,7 @@ dist_no_na <- function(mat) {
 colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
 
 #Heatmap with legend
-heatmap.2(filtered_data[,2:ncol(filtered_data)],
+fig2b<-heatmap.2(filtered_data[,2:ncol(filtered_data)],
   labRow = genenames,
   main = "Fig. 2b", # heat map title
   notecol="black",      # change font color of cell labels to black
@@ -133,7 +133,39 @@ heatmap.2(filtered_data[,2:ncol(filtered_data)],
   cexCol = 1,
   key.xlab = "Induction Values (log2 transformed)"
 )
+print(genenames[fig2b$rowInd])
+print(names(fig2b))
 
+#Heatmap with legend
+fig2ba<-heatmap.2(filtered_data[fig2b$rowInd[38:length(fig2b$rowInd)],2:ncol(filtered_data)],
+  labRow = genenames[fig2b$rowInd[38:length(fig2b$rowInd)]],
+  main = "Fig. 2b Modified", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(1,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+
+#Figure is modified to remove "noise" or rows that didn't contribute to later analysis steps
+#Heatmap with legend
+fig2ba<-heatmap.2(filtered_data[fig2b$rowInd[38:length(fig2b$rowInd)],2:ncol(filtered_data)],
+  labRow = genenames[fig2b$rowInd[38:length(fig2b$rowInd)]],
+  main = "Fig. 2b Modified", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(1,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
 
 ```
 
