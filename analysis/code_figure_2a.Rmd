@@ -140,6 +140,13 @@ save(genenames, file = "genenames.RData")
 #Turn off warnings for readablility
 options(warn = -1)
 
+#Saturation change for heatmap
+zlim = function(x, lim) { 
+  x[which(x < min(lim))] = min(lim)
+  x[which(x > max(lim))] = max(lim)
+  return(x)
+}
+
 # Replace the old distance function to account for NA values in dataset
 dist_no_na <- function(mat) {
     edist <- dist(mat)
@@ -166,21 +173,38 @@ fig2a <- heatmap.2(filtered_data[,2:ncol(filtered_data)],
   key.xlab = "Induction Values (log2 transformed)"
 )
 
+
 #Figure is modified to remove "noise" or rows that didn't contribute to later analysis steps
 #Heatmap with legend
-fig2aa<-heatmap.2(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:ncol(filtered_data)],
+fig2aaa<-heatmap.2(zlim(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:ncol(filtered_data)], c(-2,2)),
   labRow = genenames[fig2a$rowInd[38:length(fig2a$rowInd)]],
   main = "Fig. 2a Modified", # heat map title
   notecol="black",      # change font color of cell labels to black
   density.info="none",  # turns off density plot inside color legend
   trace="none",         # turns off trace lines inside the heat map
-  margins =c(1,8),     # widens margins around plot
+  margins =c(.01,8),     # widens margins around plot
   col=colorway,       # use on color palette defined earlier
   dendrogram="none",     # only draw a row dendrogram
   Colv="NA",
   cexCol = 1,
   key.xlab = "Induction Values (log2 transformed)"
 )
+
+#Increase saturation to above
+fig2aa<-heatmap.2(zlim(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:ncol(filtered_data)], c(-2,2)),
+  labRow = genenames[fig2a$rowInd[38:length(fig2a$rowInd)]],
+  main = "Fig. 2a Modified", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(.01,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+
 
 
 ```
