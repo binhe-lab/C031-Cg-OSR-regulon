@@ -68,7 +68,7 @@ print((overlap_data))
 #Within Overlap Data, select yap1 and skn7 dependent genes -- Note this was my interpretation of the papers figure 2c
 
 #First for H2O2 - See where wt was upregulated vs yap1 or skn7 deletion
-overlap_data_h2o2 <- overlap_data[(((overlap_data$`1.x`) >(overlap_data$`2.x`)) | ((overlap_data$`1.x`) >(overlap_data$`3.x`))),]
+overlap_data_h2o2 <- overlap_data[((overlap_data$`3`) >(0.5)) | ((overlap_data$`2`) >0.5),]
 
 #Next for mena - see where wt was upregulated vs double deletion
 overlap_data_mena <- overlap_data[((overlap_data$`1.y`) >(overlap_data$`2.y`)),]
@@ -76,7 +76,9 @@ overlap_data_mena <- overlap_data[((overlap_data$`1.y`) >(overlap_data$`2.y`)),]
 #check for overlap between sets
 new_overlap_data <- inner_join(overlap_data_h2o2, overlap_data_mena, by = "Genes")
 
-#draw initial venn diagram
-draw.pairwise.venn(area1 = nrow(overlap_data_h2o2), area2 = nrow(overlap_data_mena), cross.area = nrow(new_overlap_data), category = c("0.4mM H2O2 yap1 or skn7", "0.1mM Menadione yap1skn7"), fill = c("yellow","yellow"), cat.pos = c(180,180), cex = c(2,2,2), cat.cex = c(1.5,1.5), alpha = c(.75,.75))
+#draw second venn diagram
+#draw.pairwise.venn(area1 = , area2 = nrow(overlap_data_mena), cross.area = , category = c("H2O2 yap1 or skn7", "Menadione yap1skn7"), fill = c("yellow","yellow"), cat.pos = c(180,180), cex = c(2,2,2), cat.cex = c(1.5,1.5), alpha = c(.75,.75))
+
+
 
 ```
