@@ -18,6 +18,8 @@ library(data.table)
 library(gplots)
 #allow merging data tables
 library(dplyr)
+#allow for venn diagrams
+library(VennDiagram)
 
 #Reference data/output directories
 data_dir <- "../data"
@@ -115,14 +117,33 @@ filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$
 #Remove CV columns for heatmap analysis
 filtered_data <- filtered_data[,-c(3,5,7,9)]
 
+#Rearrange due to mistake in interpretation
+filtered_data <- filtered_data[,c(1,5,4,3,2,6)]
+
+names(filtered_data) <- c("Genes", "1", "2", "3",  "4", "Glucose Data")
+
+group1 <- filtered_data[(filtered_data$`1` > 0) & (filtered_data$`2` > 0) & (filtered_data$`3` > 0) & (filtered_data$`1` > filtered_data$`4`),]
+
+group1_names <- group1$`Genes`
+
 #Save the list of names for later use in labeling
 genenames <- filtered_data$`Genes`
 
+#check how many showed up in my set vs papers set
+paper_genes <- c("CAGL0A02530g","CAGL0C01705g","CAGL0F08767g","CAGL0G04609g","CAGL0G07271g","CAGL0G09977g","CAGL0I01166g","CAGL0K00803g","CAGL0K06259g","CAGL0K08184g","CAGL0K10868g","CAGL0L04664g","CAGL0B00990g","CAGL0B01419g","CAGL0D03586g","CAGL0F00363g","CAGL0G02101g","CAGL0H05665g","CAGL0H08283g","CAGL0I01100g","CAGL0I01122g","CAGL0I05830g","CAGL0J07612g","CAGL0J08096g","CAGL0J08954g","CAGL0K00847g","CAGL0K01375g","CAGL0M02211g","CAGL0M08822g","CAGL0M11704g","CAGL0C00275g","CAGL0E05280g","CAGL0F03399g","CAGL0H02739g","CAGL0I02574g","CAGL0K12958g","CAGL0L07656g","CAGL0M14047g")
+
+compList <- subset(filtered_data, Genes %in% paper_genes)
+
+#print(compList)
+
+compList <- data.matrix(compList)
+
 #Remove any rows with NAs in them
-filtered_data <- filtered_data[complete.cases(filtered_data), ]
+#filtered_data <- filtered_data[complete.cases(filtered_data), ]
 
 #convert to matrix for easy use of heatmap
 filtered_data <- data.matrix(filtered_data)
+group1 <- data.matrix(group1)
 
 filtered_data_final <- filtered_data
 save(filtered_data_final, file = "filtered_data_final.RData")
@@ -176,19 +197,19 @@ fig2a <- heatmap.2(filtered_data[,2:ncol(filtered_data)],
 
 #Figure is modified to remove "noise" or rows that didn't contribute to later analysis steps
 #Heatmap with legend
-fig2aaa<-heatmap.2(zlim(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:ncol(filtered_data)], c(-2,2)),
-  labRow = genenames[fig2a$rowInd[38:length(fig2a$rowInd)]],
-  main = "Fig. 2a Modified", # heat map title
-  notecol="black",      # change font color of cell labels to black
-  density.info="none",  # turns off density plot inside color legend
-  trace="none",         # turns off trace lines inside the heat map
-  margins =c(.01,8),     # widens margins around plot
-  col=colorway,       # use on color palette defined earlier
-  dendrogram="none",     # only draw a row dendrogram
-  Colv="NA",
-  cexCol = 1,
-  key.xlab = "Induction Values (log2 transformed)"
-)
+# fig2aaa<-heatmap.2(zlim(filtered_data[fig2a$rowInd,2:ncol(filtered_data)], c(-2,2)),
+#   labRow = genenames[fig2a$rowInd],
+#   main = "Fig. 2a Modified", # heat map title
+#   notecol="black",      # change font color of cell labels to black
+#   density.info="none",  # turns off density plot inside color legend
+#   trace="none",         # turns off trace lines inside the heat map
+#   margins =c(.01,8),     # widens margins around plot
+#   col=colorway,       # use on color palette defined earlier
+#   dendrogram="none",     # only draw a row dendrogram
+#   Colv="NA",
+#   cexCol = 1,
+#   key.xlab = "Induction Values (log2 transformed)"
+# )
 
 #Increase saturation to above
 fig2aa<-heatmap.2(zlim(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:ncol(filtered_data)], c(-2,2)),
@@ -205,6 +226,66 @@ fig2aa<-heatmap.2(zlim(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:nco
   key.xlab = "Induction Values (log2 transformed)"
 )
 
+print(genenames[fig2a$rowInd[38:length(fig2a$rowInd)]])
+#Print heatmap of paper
+# fig2apaper<-heatmap.2(zlim(compList, c(-2,2)),
+#   labRow = paper_genes,
+#   main = "Fig. 2a from Paper", # heat map title
+#   notecol="black",      # change font color of cell labels to black
+#   density.info="none",  # turns off density plot inside color legend
+#   trace="none",         # turns off trace lines inside the heat map
+#   margins =c(.01,8),     # widens margins around plot
+#   col=colorway,       # use on color palette defined earlier
+#   dendrogram="none",     # only draw a row dendrogram
+#   Colv="NA",
+#   cexCol = 1,
+#   key.xlab = "Induction Values (log2 transformed)"
+# )
 
+# print(filtered_data[fig2a$rowInd,])
+# print(group1)
+
+
+
+```
+
+###Group 1 Genes Analysis
+Genes from the reproduced data were chosen to be part of group 1 if their Column 1,2,and 3 values were greater than 0 (induced), and if their column 1 value was greater than the column 4 value, which would indicate that they are dependent on either yap1 or skn7. 5 new genes were found for group 1 using this data, but their biological efficacy needs to be evaluated. There was 1 gene found in the paper which didn't appear in the reproduced data, CAGL0G04609g. The rest of the genes were found in both lists and were stored in the variable comb below.
+
+```{r generate group1, echo=FALSE}
+
+#Group 1 candidates heatmap
+fig2a_group1<-heatmap.2(zlim(group1[,2:ncol(filtered_data)], c(-2,2)),
+  labRow = group1_names,
+  main = "Fig. 2a Group 1 Candidates", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(.01,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+
+print(group1_names)
+
+#Convert the two lists into data frames so they can be compared
+group1_names <- as.data.frame(group1_names)
+paper_genes <- as.data.frame(paper_genes)
+names(paper_genes) <- c("Genes")
+names(group1_names) <- c("Genes")
+
+#Comb is genes that show up in both lists
+comb = inner_join(group1_names,paper_genes, by ="Genes")
+
+#These are genes only found in reproduced data
+reproduceListGroup1 <- group1_names[!group1_names$`Genes` %in% comb$`Genes`,]
+  
+#draw initial venn diagram
+# diff <- draw.pairwise.venn(area1 = nrow(group1_names), area2 = nrow(paper_genes), cross.area = nrow(comb), category = c("Reproduced", "Paper"), fill = c("yellow","yellow"), cat.pos = c(180,180), cex = c(2,2,2), cat.cex = c(1.5,1.5), alpha = c(.75,.75))
+
+print(reproduceListGroup1)
 
 ```
