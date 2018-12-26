@@ -1,0 +1,171 @@
+---
+title: "Code_Figure_2b"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  html_notebook:
+    theme: united
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#allow fread function and data.table structure
+library(data.table)
+#allow heatmap functions
+library(gplots)
+
+#Reference data/output directories
+data_dir <- "../data"
+analysis_dir <- "../analysis"
+output_dir <- "../output"
+
+
+```
+
+## Goal
+
+The goal of this analysis is to use the normalized data set provided to attempt to reproduce the results as well as identify any abiguity in the methods described in the original study.
+
+## Methods Used
+
+The data was imported from the given tab-delmited file provided in the paper and exported as a .csv file for use in R: "normalized_data_oxidative_stress_Candida_glabrata.txt.csv". The analysis was done by formatting the data in the .csv. 
+
+##Legend - Based on .sdrf file & Heatmap 2b
+
+| Column | Sample 1 | Sample 2 |
+| --------- | ----------- | ----------- |
+| 1  | WT Menadione stress | WT unstressed |
+| 2  | yap1$\Delta$skn7$\Delta$ Menadione stress | yap1$\Delta$skn7$\Delta$ unstressed |
+
+```{r read data, echo=FALSE}
+
+#read in data from csv
+fread("../data/normalized_data_oxidative_stress_Candida_glabrata.txt.csv",  na.strings=getOption("datatable.na.strings","null")) -> unfiltered_data
+
+```
+
+```{r format csv, echo=FALSE}
+#Turn off warnings for readablility
+options(warn = -1)
+
+#Remove header columns and rows to get raw data
+unfiltered_data[-1,] -> filtered_data
+
+#Remove SD and CV columns since not needed for heatmap below - keep 8,10,14,16 since Mena columns
+filtered_data <- filtered_data[,-c(2,3,4,5,6,7,9,11,12,13,15,17,18,19)]
+
+#This line is just used to make the next step easier, not necessary; see note below about bug
+names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV")
+
+#extra column created to work around bug mentioned below
+filtered_data$dup <- filtered_data$`1`
+
+#converts values checked by str() from factors to numerics for heatmap 
+#There is a bug here where the first column (2 in this case) becomes all NA - col 'dup' from above is used as an extra column that gets the values from the column to the left of it, while the second column gets nullified so that all the important columns are ok - second column will now get removed in next step and everything will be renamed accordingly to the values in the .csv
+filtered_data[, 2:ncol(filtered_data) := lapply(.SD, as.numeric)]
+
+#remove nullified column
+filtered_data <- filtered_data[, -2]
+
+#Reset names to correct values
+names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV")
+
+#Save current variable for further analysis
+filtered_data_mena <- filtered_data
+save(filtered_data_mena, file = "filtered_data_mena.RData")
+
+# Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
+filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1),]
+
+#Remove CV columns for heatmap analysis
+filtered_data <- filtered_data[,-c(3,5)]
+
+#Remove any rows with NAs in them
+filtered_data <- filtered_data[complete.cases(filtered_data), ]
+
+#Save the list of names for later use in labeling
+genenames <- filtered_data$`Genes`
+genenames_mena <- genenames
+
+#convert to matrix for easy use of heatmap
+filtered_data <- data.matrix(filtered_data)
+
+filtered_data_mena_final <- filtered_data
+save(filtered_data_mena_final, file = "filtered_data_mena_final.RData")
+save(genenames_mena, file = "genenames_mena.RData")
+
+#Testing
+#print(names(filtered_data))
+#print(filtered_data)
+
+```
+
+
+```{r generate heatmaps and print, echo=FALSE}
+#Turn off warnings for readablility
+options(warn = -1)
+
+# Replace the old distance function to account for NA values in dataset
+dist_no_na <- function(mat) {
+    edist <- dist(mat)
+    edist[which(is.na(edist))] <- max(edist, na.rm=TRUE) * 1.1 
+    return(edist)
+}
+
+#Assign color gradient for heatmap
+colorway <- colorRampPalette(c("cyan", "black", "yellow"))(n = 500)
+
+#Heatmap with legend
+fig2b<-heatmap.2(filtered_data[,2:ncol(filtered_data)],
+  labRow = genenames,
+  main = "Fig. 2b", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(1,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  distfun=dist_no_na,   # needed for NA values to not interfere in heatmap
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+print(genenames[fig2b$rowInd])
+print(names(fig2b))
+
+#Heatmap with legend
+fig2ba<-heatmap.2(filtered_data[fig2b$rowInd[38:length(fig2b$rowInd)],2:ncol(filtered_data)],
+  labRow = genenames[fig2b$rowInd[38:length(fig2b$rowInd)]],
+  main = "Fig. 2b Modified", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(1,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+
+#Figure is modified to remove "noise" or rows that didn't contribute to later analysis steps
+#Heatmap with legend
+fig2ba<-heatmap.2(filtered_data[fig2b$rowInd[38:length(fig2b$rowInd)],2:ncol(filtered_data)],
+  labRow = genenames[fig2b$rowInd[38:length(fig2b$rowInd)]],
+  main = "Fig. 2b Modified", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(1,8),     # widens margins around plot
+  col=colorway,       # use on color palette defined earlier
+  dendrogram="none",     # only draw a row dendrogram
+  Colv="NA",
+  cexCol = 1,
+  key.xlab = "Induction Values (log2 transformed)"
+)
+
+```
+
