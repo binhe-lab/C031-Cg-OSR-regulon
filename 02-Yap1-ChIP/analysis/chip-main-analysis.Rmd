@@ -40,7 +40,7 @@ gpl8477 <- getGEO(filename = "../data/raw-chip-gpr/GPL8477_family.soft.gz")
 
 ```{r data_QC}
 # MA plot
-plotMD(RG)
+plotMD(RG, column=1)
 # Boxplot for the background intensities
 boxplot(data.frame(log2(RG$Gb)),main="Green background")
 boxplot(data.frame(log2(RG$Rb)),main="Red background")
