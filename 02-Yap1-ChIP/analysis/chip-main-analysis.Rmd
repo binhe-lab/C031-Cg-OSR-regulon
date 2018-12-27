@@ -1,0 +1,64 @@
+---
+title: "Kuo et al 2010 CgAp-1 Reanalysis"
+author: Bin He
+output: html_notebook
+---
+
+**Goal**
+
+Reanalyze Yap1 ChIP in _C. glabrata_ in order to identify the genomic regions bound by the TF.
+
+**Reference**
+1. Kuo D, Licon K, Bandyopadhyay S, Chuang R, Luo C, Catalana J, et al. Coevolution within a transcriptional network by compensatory trans and cis mutations. Genome Res. 2010 Dec 1;20(12):1672–8. 
+
+**Data**
+Three replicates for CgAp-1 ChIP. For each replicate, the IP enriched DNA is labeled with Cy5 (and the corresponding unenriched (input) DNA is labeled with Cy3. The mixture of the two was hybridized to a custom Agilent microarray, scanned using a Genepix 4000A scanner and analyzed by GenePix 6.0, producing a two-color array dataset in the gpr format.
+
+## Setup the environment
+
+```{r load_libraries}
+require(limma)
+require(ggplot2)
+require(Biobase)
+require(GEOquery)
+```
+
+## Data preparation
+
+There are three files in total, corresponding to the three replicates, with the names of GSM397447,48,49
+
+```{r load_data}
+# load target data frame, containing the sample information and file names
+targets <- readTargets("../data/raw-chip-gpr/yap1-chip-sample.txt",row.names = "Name")
+# add relative path
+targets$FileName <- paste("../data/raw-chip-gpr/",targets$FileName,sep="")
+# load raw data
+RG <- read.maimages(targets, source="genepix")
+# load platform (microarray) design
+gpl8477 <- getGEO(filename = "../data/raw-chip-gpr/GPL8477_family.soft.gz")
+```
+
+```{r data_QC}
+# MA plot
+plotMD(RG)
+# Boxplot for the background intensities
+boxplot(data.frame(log2(RG$Gb)),main="Green background")
+boxplot(data.frame(log2(RG$Rb)),main="Red background")
+# array 2 seems to have unusually high background, examine its image
+imageplot(log2(RG$Gb[,2]),RG$printer, main = "array 2, Green")
+imageplot(log2(RG$Rb[,2]),RG$printer, main = "array 2, Red")
+# compare them to array 1 and 3
+imageplot(log2(RG$Gb[,1]),RG$printer, main = "array 1, Green")
+imageplot(log2(RG$Rb[,1]),RG$printer, main = "array 1, Red")
+imageplot(log2(RG$Gb[,3]),RG$printer, main = "array 3, Green")
+imageplot(log2(RG$Rb[,3]),RG$printer, main = "array 3, Red")
+```
+
+```{r pre_processing}
+RGb1 <- backgroundCorrect(RG, method="subtract")
+RGb2 <- backgroundCorrect(RG, method="normexp", offset=50)
+plotMD(RGb1, column=2)
+plotMD(RGb2, column=2)
+# the normexp method was recommended by LIMMA manual. within array normalization is then applied on the background corrected dataset
+MA <- normalizeWithinArrays(RGb2)
+```
