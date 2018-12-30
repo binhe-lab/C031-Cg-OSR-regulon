@@ -1,0 +1,8 @@
+#+title: Analysis notes
+#+author: Bin He
+
+* [2018-12-30 Sun] Compare raw data in the .gpr file vs in the platform (gpl) file
+/Background/
+I previously downloaded the supplementary tar ball from the GEO [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15818][main page]] for the paper. File name is GSE15818_RAW.tar, which contains one gzipped .gpr file for each sample. I then used ~getGEO()~ function in =R/GEOquery= to load it into the memory. I then followed LIMMA manual to perform some exploratory analysis on the raw data file stored in an object named RG (stands for RedGreen). I have several confusions:
+1. The raw intensity values for the third chip (GSM397449) appears to be much lower than the rest two
+2. ChIP 2 (GSM397448) has unusually high background.

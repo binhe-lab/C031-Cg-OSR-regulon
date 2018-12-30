@@ -1,4 +1,0 @@
-SlideNumber	Name	FileName	Cy3	Cy5
-1	Rep1	GSM397447.gpr.gz	input	IP
-2	Rep2	GSM397448.gpr.gz	input	IP
-3	Rep3	GSM397449.gpr.gz	input	IP
