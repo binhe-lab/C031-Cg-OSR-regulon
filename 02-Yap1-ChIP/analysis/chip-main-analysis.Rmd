@@ -1,0 +1,90 @@
+---
+title: "Kuo et al 2010 CgAp-1 Reanalysis"
+author: Bin He
+output: html_notebook
+---
+
+**Goal**
+
+Reanalyze Yap1 ChIP in _C. glabrata_ in order to identify the genomic regions bound by the TF.
+
+**Reference**
+1. Kuo D, Licon K, Bandyopadhyay S, Chuang R, Luo C, Catalana J, et al. Coevolution within a transcriptional network by compensatory trans and cis mutations. Genome Res. 2010 Dec 1;20(12):1672–8. 
+
+**Data**
+Three replicates for CgAp-1 ChIP. For each replicate, the IP enriched DNA is labeled with Cy5 (and the corresponding unenriched (input) DNA is labeled with Cy3. The mixture of the two was hybridized to a custom Agilent microarray, scanned using a Genepix 4000A scanner and analyzed by GenePix 6.0, producing a two-color array dataset in the gpr format.
+
+## Setup the environment
+
+```{r load_libraries}
+require(limma)
+require(ggplot2)
+require(Biobase)
+require(GEOquery)
+```
+
+## Data preparation
+
+There are three files in total, corresponding to the three replicates, with the names of GSM397447,48,49
+
+```{r load_and_process_data}
+# first load the data for QC. Note that these files will not be used in latter analysis
+# see doc/notes-hb.org for reasons
+
+# load target data frame, containing the sample information and file names
+targets <- readTargets("../data/yap1-chip-sample.txt",row.names = "Name")
+# add relative path
+targets$FileName <- paste("../data/",targets$FileName,sep="")
+# load raw data
+RG <- read.maimages(targets, source="genepix")
+# background correction using normexp method
+RGb <- backgroundCorrect(RG, method="normexp", offset=50)
+
+# the normexp method was recommended by LIMMA manual. within array normalization is then applied on the background corrected dataset
+MA <- normalizeWithinArrays(RGb)
+```
+
+```{r data_QC,fig.path="../output/figure/", dev=c("png")}
+
+# plot QC in a pdf file
+# pdf(paste("../output/figure/",format(Sys.time(),"%Y-%m-%d-"),"data-qc.pdf",sep=""))
+
+# MA plot
+plotMD(RG, column=1)
+plotMD(RG, column=2)
+plotMD(RG, column=3)
+# Boxplot for the background intensities
+boxplot(data.frame(log2(RG$Gb)),main="Green background")
+boxplot(data.frame(log2(RG$Rb)),main="Red background")
+# array 2 seems to have unusually high background, examine its image
+imageplot(log2(RG$Gb[,2]),RG$printer, main = "array 2, Green")
+imageplot(log2(RG$Rb[,2]),RG$printer, main = "array 2, Red")
+# compare them to array 1 and 3
+imageplot(log2(RG$Gb[,1]),RG$printer, main = "array 1, Green")
+imageplot(log2(RG$Rb[,1]),RG$printer, main = "array 1, Red")
+imageplot(log2(RG$Gb[,3]),RG$printer, main = "array 3, Green")
+imageplot(log2(RG$Rb[,3]),RG$printer, main = "array 3, Red")
+# background corrected MA plots
+plotMD(RGb, column=1)
+plotMD(RGb, column=2)
+plotMD(RGb, column=3)
+# after LOESS within array normalization
+plotMD(MA, column=1)
+plotMD(MA, column=2)
+plotMD(MA, column=3)
+
+# dev.off()
+```
+
+## Problem with the raw gpr file
+
+I previously downloaded the supplementary tar ball from the GEO [main page](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15818) for the paper. File name is GSE15818<sub>RAW.tar</sub>, which contains one gzipped .gpr file for each sample. I then used `getGEO()` function in `R/GEOquery` to load it into the memory. I then followed LIMMA manual to perform some exploratory analysis on the raw data file stored in an object named RG (stands for RedGreen). I have several confusions:
+
+1.  The raw intensity values for the third chip (GSM397449) appears to be much lower than the rest two
+2.  ChIP 2 (GSM397448) has unusual background (`imageplot()` shows spill like patterns on the slide)
+3.  After background correction and within array normalization, the outliers of the log10 Cy5/Cy3 ratio appears to be mostly negative, even though Cy5 is supposed to be IP-enriched and Cy3 for input.
+
+## Conclusion
+
+-   Still couldn't figure out how the authors derived the normalized log10 ratios from their raw data. My test yielded largely negative outliers (meaning IP DNA is less than input)
+-   Learning how to parse the various formats of GEO datasets (SOFT format have a number of different formatting) is challenging. It might be easier to just extract the matrix of normalized data and use that as input for MochiView or peak finding software
