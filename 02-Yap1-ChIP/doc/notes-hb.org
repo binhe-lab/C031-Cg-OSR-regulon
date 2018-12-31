@@ -7,7 +7,7 @@ I previously downloaded the supplementary tar ball from the GEO [[https://www.nc
 1. The raw intensity values for the third chip (GSM397449) appears to be much lower than the rest two
 2. ChIP 2 (GSM397448) has unusual background (=imageplot()= shows spill like patterns on the slide)
 3. After background correction and within array normalization, the outliers of the log10 Cy5/Cy3 ratio appears to be mostly negative, even though Cy5 is supposed to be IP-enriched and Cy3 for input.
-See [[file:~/Documents/work/current/C031-Cg-OSR-regulon/02-Yap1-ChIP/output/figure/2018-12-31-data-qc.pdf][QC plots]]
+See [[file:../output/figure/2018-12-31-data-qc.pdf][QC plot]]
 ** Decode various GEO data files
 [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15818]]
 | File name                          | Download Loc.                            | Description                              |
@@ -22,3 +22,9 @@ See [[file:~/Documents/work/current/C031-Cg-OSR-regulon/02-Yap1-ChIP/output/figu
 ** Conclusion
 - Still couldn't figure out how the authors derived the normalized log10 ratios from their raw data. My test yielded largely negative outliers (meaning IP DNA is less than input)
 - Learning how to parse the various formats of GEO datasets (SOFT format have a number of different formatting) is challenging. It might be easier to just extract the matrix of normalized data and use that as input for MochiView or peak finding software
+  
+** Notes from my journal
+- Zoheb and I have had a lot of trouble trying to make sense of the GEO dataset. We initially downloaded the gzipped gpr files (supplementary files from GEO site) and loaded them into R using the LIMMA package. However, there are multiple issues with those data: chip 2 appears to have a major spill contamination, as visualized by the =imageplot()= function just for the BG values. Besides, the MA plot for replicate 3 is dramatically different from the other 2, both of which showed a strange "boundary" like an arrow pointing to the right. It looks like at spots with high A values (geometric mean of the Red and Green intensities), the two channels have a strong positive correlation. This pattern is absent in replicate 3, which also displayed far lower raw intensities than replicates 1 and 2.
+- I found a [[https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/geo/][webpage]] explaining how to use the =GEOquery= package's =getGEO()= function to directly download and import GEO datasets. I tried this function with various GEO accession names, including GSE (GEO series), GSM (individual samples) and GPL (platforms), and got a bunch of different formats. I documented what each format contains in the github repo's doc folder as well as in the README in the data folder.
+- While I still couldn't make sense of the raw data, the downloaded files did included normalized log10 ratios between IP-enriched and input DNA, which we can directly use to identify binding locations and perform motif discoveries.
+
