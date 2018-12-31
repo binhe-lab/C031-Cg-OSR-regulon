@@ -2,7 +2,23 @@
 #+author: Bin He
 
 * [2018-12-30 Sun] Compare raw data in the .gpr file vs in the platform (gpl) file
-/Background/
+** Problem with the raw gpr file
 I previously downloaded the supplementary tar ball from the GEO [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15818][main page]] for the paper. File name is GSE15818_RAW.tar, which contains one gzipped .gpr file for each sample. I then used ~getGEO()~ function in =R/GEOquery= to load it into the memory. I then followed LIMMA manual to perform some exploratory analysis on the raw data file stored in an object named RG (stands for RedGreen). I have several confusions:
 1. The raw intensity values for the third chip (GSM397449) appears to be much lower than the rest two
-2. ChIP 2 (GSM397448) has unusually high background.
+2. ChIP 2 (GSM397448) has unusual background (=imageplot()= shows spill like patterns on the slide)
+3. After background correction and within array normalization, the outliers of the log10 Cy5/Cy3 ratio appears to be mostly negative, even though Cy5 is supposed to be IP-enriched and Cy3 for input.
+See [[file:~/Documents/work/current/C031-Cg-OSR-regulon/02-Yap1-ChIP/output/figure/2018-12-31-data-qc.pdf][QC plots]]
+** Decode various GEO data files
+[[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15818]]
+| File name                          | Download Loc.                            | Description                              |
+|------------------------------------+------------------------------------------+------------------------------------------|
+|                                    | <40>                                     | <40>                                     |
+| GPL8477.soft.gz                    | getGEO("GPL8477",destdir = ".")          | Platform annotation file                 |
+| GPL8477_family.soft.gz             | supplementary file from [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL8477][GEO site]] | In addition to the probe info as above, this file also contains the normalized log10 ratio for all three replicates |
+| GSE15818-GPL8477_series_matrix.txt | getGEO("GSE15818",destdir = ".")         | (Preferred to the above) matrix format with one column of normalized log10 ratio for each of the three replicates; each row is a probe, ordered |
+| GSM397447.soft.gz                  | getGEO("GSM397447",destdir = ".")        | normalized log10 ratio (Cy5/Cy3) representing IP/input for one replicate only |
+| GSM397447.gpr.gz                   | supplementary file from [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM397447][GEO site]] | Raw data file containing the Cy5 and Cy3 reading with mean, sd, background information and so on |
+
+** Conclusion
+- Still couldn't figure out how the authors derived the normalized log10 ratios from their raw data. My test yielded largely negative outliers (meaning IP DNA is less than input)
+- Learning how to parse the various formats of GEO datasets (SOFT format have a number of different formatting) is challenging. It might be easier to just extract the matrix of normalized data and use that as input for MochiView or peak finding software

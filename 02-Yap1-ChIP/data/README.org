@@ -1,0 +1,9 @@
+* Data files explanation
+[[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15818]]
+| File name                          | Download Loc.                     | Description                                                                                                                                     |
+|------------------------------------+-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------|
+| GPL8477.soft.gz                    | getGEO("GPL8477",destdir = ".")   | Platform annotation file                                                                                                                        |
+| GPL8477_family.soft.gz             | supplementary file from [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL8477][GEO site]]  | In addition to the probe info as above, this file also contains the normalized log10 ratio for all three replicates                             |
+| GSE15818-GPL8477_series_matrix.txt | getGEO("GSE15818",destdir = ".")  | (Preferred to the above) matrix format with one column of normalized log10 ratio for each of the three replicates; each row is a probe, ordered |
+| GSM397447.soft.gz                  | getGEO("GSM397447",destdir = ".") | normalized log10 ratio (Cy5/Cy3) representing IP/input for one replicate only                                                                   |
+| GSM397447.gpr.gz                   | supplementary file from [[https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM397447][GEO site]]  | Raw data file containing the Cy5 and Cy3 reading with mean, sd, background information and so on                                                |
