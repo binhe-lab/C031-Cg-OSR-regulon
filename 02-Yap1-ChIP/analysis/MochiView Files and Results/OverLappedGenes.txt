@@ -1,0 +1,10 @@
+This file contains the overlapped genes which were found to be regulated by Yap 1 in both the Roetzer Data set as well as those in the Kuo et al Data set, it also lists how close the peak value ranges (Found in PeakCallingResults.txt) were to the ORF of the genes
+
+Overlapped Genes
+CAGL0C01705g - peak within 300bp
+CAGL0J09680g - peak within 200bp
+CAGL0K00803g - peak within 1.2kb of gene
+CAGL0K00847g - peak within 1.7kb of gene
+CAGL0K05357g - peak within 2.2kb of gene
+CAGL0K06259g - peak within gene
+CAGL0K10868g - peak within gene

@@ -286,6 +286,6 @@ reproduceListGroup1 <- group1_names[!group1_names$`Genes` %in% comb$`Genes`,]
 #draw initial venn diagram
 # diff <- draw.pairwise.venn(area1 = nrow(group1_names), area2 = nrow(paper_genes), cross.area = nrow(comb), category = c("Reproduced", "Paper"), fill = c("yellow","yellow"), cat.pos = c(180,180), cex = c(2,2,2), cat.cex = c(1.5,1.5), alpha = c(.75,.75))
 
-print(reproduceListGroup1)
+print(length(reproduceListGroup1))
 
 ```
