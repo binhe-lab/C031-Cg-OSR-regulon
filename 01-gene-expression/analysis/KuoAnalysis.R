@@ -1,4 +1,5 @@
 library(limma)
+library(Ringo)
 setwd("C:/Users/Zoheb/Desktop/HE LAB/kuo_data/")
 
 #Read in files
@@ -15,6 +16,13 @@ reads3 <- read.maimages(files = file.3.gpr, source = 'genepix')
 RG1 <- backgroundCorrect(reads1)
 RG2 <- backgroundCorrect(reads2)
 RG3 <- backgroundCorrect(reads3)
+
+par(mar=c(0.01,0.01,0.01,0.01), bg="black")
+image(RG1, 1, channel="red", dim1="Column", dim2="Row", mycols=c("sienna","darkred","orangered"))
+X <- preprocess(RG1[RG1$genes$ControlType==0,], method="nimblegen", idColumn="ProbeName")
+
+
+print(typeof(RG1))
 
 #Get MA values, reverse sign since dyes are given in reversed order
 MA1 <- normalizeWithinArrays(RG1)
