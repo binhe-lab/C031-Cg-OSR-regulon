@@ -1,0 +1,7 @@
+allGenome_bPeak_12	in CDS	CAGL0D05456g||ORF|Uncharacterized
+allGenome_bPeak_22	in CDS	CAGL0G09383g|TDH3|ORF|Verified
+allGenome_bPeak_23	in CDS	CAGL0K06259g|TSA1|ORF|Uncharacterized
+allGenome_bPeak_30	in CDS	CAGL0H00704g||ORF|Uncharacterized
+allGenome_bPeak_34	in CDS	CAGL0I07843g|ADH1|ORF|Verified
+allGenome_bPeak_44	in CDS	CAGL0M07920g|PDC|ORF|Verified
+allGenome_bPeak_64	in CDS	CAGL0M05797g||ORF|Uncharacterized

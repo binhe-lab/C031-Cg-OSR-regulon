@@ -1,3 +1,5 @@
+#This file replicates figure 2e from Roetzer et al using the analysis results from reproducing the earlier figures.
+
 #Graphing functions
 import matplotlib.pyplot as plt
 import numpy as np

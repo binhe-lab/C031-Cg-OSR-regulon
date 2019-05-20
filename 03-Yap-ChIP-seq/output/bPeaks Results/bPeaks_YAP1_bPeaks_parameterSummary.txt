@@ -1,0 +1,2 @@
+smoothingValue	windowSize	windowOverlap	IPcoeff	controlCoeff	log2FC	averageQuantiles	bPeaksNumber	meanSize	meanIPsignal	meanControlSignal	meanLog2FC	meanAverageLog2FC	bPeaksNumber_beforeFeatures	bPeaksNumber_inFeatures
+20	150	50	2	2	2	0.9	74	318.919	756.693	97.473	2.695	7.926	51	7
