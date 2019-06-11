@@ -111,8 +111,13 @@ names(filtered_data) <- c("Genes", "1", "1 CV", "2", "2 CV", "3", "3 CV", "4", "
 #save filtered_data file for use in other .Rmd files
 save(filtered_data, file = "filtered_data.RData")
 
-# Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
-filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1) | ((abs(filtered_data$`3`) > 1.59) & filtered_data$`3 CV`<1) | ((abs(filtered_data$`4`) > 1.59) & filtered_data$`4 CV`<1),] 
+# Note covariance was confused with variance when originally analyzing this, issue is resolved
+
+  # Only keep rows where atleast one column has >3x induction/repression, 1.59 is used here since data was log-base 2 transformed, also account for CV<1 to remove highly variant genes
+
+  #filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) & filtered_data$`1 CV`<1) | ((abs(filtered_data$`2`) > 1.59) & filtered_data$`2 CV`<1) | ((abs(filtered_data$`3`) > 1.59) & filtered_data$`3 CV`<1) | ((abs(filtered_data$`4`) > 1.59) & filtered_data$`4 CV`<1),] 
+
+filtered_data <- filtered_data[((abs(filtered_data$`1`) > 1.59) | (abs(filtered_data$`2`) > 1.59)  | (abs(filtered_data$`3`) > 1.59) | (abs(filtered_data$`4`) > 1.59)),] 
 
 #Remove CV columns for heatmap analysis
 filtered_data <- filtered_data[,-c(3,5,7,9)]
@@ -222,6 +227,7 @@ fig2aa<-heatmap.2(zlim(filtered_data[fig2a$rowInd[38:length(fig2a$rowInd)],2:nco
   col=colorway,       # use on color palette defined earlier
   dendrogram="none",     # only draw a row dendrogram
   Colv="NA",
+  distfun=dist_no_na,
   cexCol = 1,
   key.xlab = "Induction Values (log2 transformed)"
 )
