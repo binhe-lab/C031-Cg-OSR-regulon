@@ -1,0 +1,735 @@
+GO Annotation,"Extremely High Confidence, N=6","High Confidence, N=50","Low Confidence, N=130","Reference Set, N=206"
+cellular response to oxidative stress,1.0,0.08,0.031,0.083
+unknown cellular component,0.167,0.38,0.146,0.364
+cytoplasm,0.667,0.12,0.046,0.117
+oxidation-reduction process,0.667,0.06,0.023,0.102
+cytosol,0.333,0.16,0.062,0.107
+unknown molecular function,,0.28,0.108,0.262
+hydrogen peroxide catabolic process,0.5,0.02,0.008,0.024
+mitochondrion,0.333,0.08,0.031,0.107
+cellular detoxification of hydrogen peroxide,0.5,,,0.015
+unknown biological process,,0.2,0.077,0.223
+nucleus,0.167,0.1,0.038,0.126
+cell redox homeostasis,0.333,0.04,0.015,0.029
+cellular response to drug,0.167,0.12,0.046,0.063
+thioredoxin peroxidase activity,0.333,0.02,0.008,0.019
+positive regulation of transcription from RNA polymerase II promoter in response to oxidative stress,0.333,0.02,0.008,0.015
+catalase activity,0.333,,,0.01
+pathogenesis,0.167,0.08,0.031,0.049
+plasma membrane,,0.14,0.054,0.097
+positive regulation of transcription by RNA polymerase II,0.167,0.04,0.015,0.044
+RNA polymerase II proximal promoter sequence-specific DNA binding,0.167,0.04,0.015,0.024
+DNA-binding transcription factor activity,0.167,0.04,0.015,0.024
+nuclear chromatin,0.167,0.04,0.015,0.024
+response to oxidative stress,0.167,0.04,0.015,0.015
+"DNA-binding transcription activator activity, RNA polymerase II-specific",0.167,0.04,0.015,0.015
+DNA binding,0.167,0.02,0.008,0.034
+peroxisome,0.167,0.02,0.008,0.029
+apoptotic process,0.167,0.02,0.008,0.015
+regulation of transcription from RNA polymerase II promoter in response to oxidative stress,0.167,0.02,0.008,0.015
+transcription regulatory region DNA binding,0.167,0.02,0.008,0.015
+unfolded protein binding,0.167,0.02,0.008,0.015
+heme binding,0.167,0.02,0.008,0.015
+regulation of endoplasmic reticulum unfolded protein response,0.167,0.02,0.008,0.01
+response to singlet oxygen,0.167,0.02,0.008,0.01
+response to metal ion,0.167,0.02,0.008,0.01
+peroxidase activity,0.167,0.02,0.008,0.01
+RNA polymerase II transcription factor complex,0.167,0.02,0.008,0.01
+response to drug,0.167,,,0.019
+protein folding,0.167,,,0.019
+regulation of transcription by RNA polymerase II,0.167,,,0.015
+positive regulation of transcription from RNA polymerase II promoter in response to heat stress,0.167,,,0.01
+thioredoxin-disulfide reductase activity,0.167,,,0.01
+removal of superoxide radicals,0.167,,,0.01
+peroxiredoxin activity,0.167,,,0.01
+cellular oxidant detoxification,0.167,,,0.005
+cellular response to caffeine,0.167,,,0.005
+cellular response to cadmium ion,0.167,,,0.005
+"regulation of transcription, DNA-templated",0.167,,,0.005
+positive regulation of transcription from RNA polymerase II promoter in response to menadione,0.167,,,0.005
+extrinsic component of mitochondrial outer membrane,0.167,,,0.005
+phospholipid-hydroperoxide glutathione peroxidase activity,0.167,,,0.005
+extrinsic component of mitochondrial inner membrane,0.167,,,0.005
+temperature compensation of the circadian clock,0.167,,,0.005
+cellular protein localization,0.167,,,0.005
+negative regulation of DNA-binding transcription factor activity,0.167,,,0.005
+response to heat,0.167,,,0.005
+glutathione peroxidase activity,0.167,,,0.005
+regulation of circadian rhythm,0.167,,,0.005
+evasion or tolerance of host immune response,0.167,,,0.005
+positive regulation of transcription from RNA polymerase II promoter in response to increased salt,0.167,,,0.005
+sulfiredoxin activity,0.167,,,0.005
+filamentous growth,,0.08,0.031,0.039
+mitochondrial intermembrane space,,0.08,0.031,0.029
+fungal biofilm matrix,,0.06,0.023,0.053
+heme biosynthetic process,,0.08,0.031,0.019
+mitochondrial matrix,,0.08,0.031,0.019
+ATP binding,,0.04,0.015,0.063
+zinc ion binding,,0.04,0.015,0.058
+endoplasmic reticulum,,0.06,0.023,0.029
+iron ion binding,,0.06,0.023,0.024
+filamentous growth of a population of unicellular organisms in response to biotic stimulus,,0.06,0.023,0.019
+hyphal cell wall,,0.04,0.015,0.034
+negative regulation of transcription by RNA polymerase II,,0.04,0.015,0.034
+extracellular region,,0.04,0.015,0.034
+integral component of membrane,,0.04,0.015,0.034
+yeast-form cell wall,,0.04,0.015,0.029
+oxidoreductase activity,,0.04,0.015,0.029
+filamentous growth of a population of unicellular organisms,,0.04,0.015,0.029
+lipid droplet,,0.04,0.015,0.019
+filamentous growth of a population of unicellular organisms in response to starvation,,0.04,0.015,0.019
+transcription elongation from RNA polymerase II promoter,,0.04,0.015,0.019
+nucleotide binding,,0.02,0.008,0.044
+ergosterol biosynthetic process,,0.04,0.015,0.015
+fatty acid biosynthetic process,,0.04,0.015,0.015
+iron-sulfur cluster assembly,,0.04,0.015,0.015
+porphobilinogen synthase activity,,0.04,0.015,0.01
+aerobic respiration,,0.04,0.015,0.01
+cellular response to starvation,,0.04,0.015,0.01
+"2 iron, 2 sulfur cluster binding",,0.04,0.015,0.01
+cell surface,,0.02,0.008,0.034
+fungal-type cell wall organization,,,,0.053
+signal transduction,,0.02,0.008,0.024
+FMN binding,,0.02,0.008,0.024
+protein phosphorylation,,0.02,0.008,0.019
+cytoplasmic translational elongation,,0.02,0.008,0.019
+hyphal growth,,0.02,0.008,0.019
+"DNA-binding transcription factor activity, RNA polymerase II-specific",,0.02,0.008,0.019
+fungal-type cell wall,,,,0.044
+pyridoxal phosphate binding,,0.02,0.008,0.015
+transcription coregulator activity,,0.02,0.008,0.015
+mitochondrial inner membrane,,0.02,0.008,0.015
+xenobiotic detoxification by transmembrane export across the plasma membrane,,0.02,0.008,0.015
+NADP binding,,0.02,0.008,0.015
+mitochondrial membrane,,0.02,0.008,0.015
+endoplasmic reticulum to Golgi vesicle-mediated transport,,0.02,0.008,0.015
+metal ion binding,,0.02,0.008,0.015
+biosynthetic process,,0.02,0.008,0.015
+positive regulation of filamentous growth of a population of unicellular organisms in response to starvation,,0.02,0.008,0.015
+mating-type region heterochromatin,,0.02,0.008,0.01
+tetrahydrofolylpolyglutamate synthase activity,,0.02,0.008,0.01
+hydrolase activity,,0.02,0.008,0.01
+coenzyme binding,,0.02,0.008,0.01
+positive regulation of pseudohyphal growth,,0.02,0.008,0.01
+RNA polymerase II preinitiation complex assembly,,0.02,0.008,0.01
+response to hydrogen peroxide,,0.02,0.008,0.01
+drug transport,,0.02,0.008,0.01
+macroautophagy,,0.02,0.008,0.01
+glycolytic fermentation to ethanol,,0.02,0.008,0.01
+membrane raft,,0.02,0.008,0.01
+replicative cell aging,,0.02,0.008,0.01
+folic acid-containing compound biosynthetic process,,0.02,0.008,0.01
+xenobiotic transmembrane transporter activity,,0.02,0.008,0.01
+electron transfer activity,,0.02,0.008,0.01
+mannosyl-inositol phosphorylceramide metabolic process,,0.02,0.008,0.01
+cellular response to hydrogen peroxide,,0.02,0.008,0.01
+flavin adenine dinucleotide binding,,0.02,0.008,0.01
+sequence-specific DNA binding,,0.02,0.008,0.01
+cellular response to reactive oxygen species,,0.02,0.008,0.01
+cellular response to osmotic stress,,0.02,0.008,0.01
+metalloendopeptidase activity,,0.02,0.008,0.01
+transcription initiation from RNA polymerase II promoter,,0.02,0.008,0.01
+ascospore formation,,0.02,0.008,0.01
+regulation of cell size,,0.02,0.008,0.01
+NAD(P)H dehydrogenase (quinone) activity,,0.02,0.008,0.01
+ferrous iron binding,,0.02,0.008,0.01
+conidium formation,,0.02,0.008,0.01
+protein N-linked glycosylation,,0.02,0.008,0.01
+pentose-phosphate shunt,,0.02,0.008,0.01
+NADH oxidation,,0.02,0.008,0.01
+mediator complex,,0.02,0.008,0.01
+glucose metabolic process,,0.02,0.008,0.01
+autophagy of mitochondrion,,0.02,0.008,0.005
+NADPH regeneration,,0.02,0.008,0.005
+protein phosphatase regulator activity,,0.02,0.008,0.005
+protein localization by the Cvt pathway,,0.02,0.008,0.005
+5-aminolevulinate synthase activity,,0.02,0.008,0.005
+carbohydrate metabolic process,,0.02,0.008,0.005
+"sulfate assimilation, phosphoadenylyl sulfate reduction by phosphoadenylyl-sulfate reductase (thioredoxin)",,0.02,0.008,0.005
+hydroxymethylbilane synthase activity,,0.02,0.008,0.005
+N-glycan processing,,0.02,0.008,0.005
+NADH dehydrogenase activity,,0.02,0.008,0.005
+protein phosphatase 1 binding,,0.02,0.008,0.005
+protein maturation by iron-sulfur cluster transfer,,0.02,0.008,0.005
+cellular hyperosmotic response,,0.02,0.008,0.005
+protein disulfide oxidoreductase activity,,0.02,0.008,0.005
+RNA polymerase II transcription regulator recruiting activity,,0.02,0.008,0.005
+AMP-activated protein kinase activity,,0.02,0.008,0.005
+sphingolipid metabolic process,,0.02,0.008,0.005
+iron-sulfur cluster binding,,0.02,0.008,0.005
+positive regulation of transcription from RNA polymerase II promoter in response to stress,,0.02,0.008,0.005
+ion transport,,0.02,0.008,0.005
+cellular iron ion homeostasis,,0.02,0.008,0.005
+protein catabolic process,,0.02,0.008,0.005
+negative regulation of filamentous growth of a population of unicellular organisms,,0.02,0.008,0.005
+holocytochrome-c synthase activity,,0.02,0.008,0.005
+regulation of conidium formation,,0.02,0.008,0.005
+positive regulation of induction of conjugation with cellular fusion by regulation of transcription from RNA polymerase II promoter,,0.02,0.008,0.005
+glycerone-phosphate O-acyltransferase activity,,0.02,0.008,0.005
+chromatin silencing at silent mating-type cassette,,0.02,0.008,0.005
+sphingolipid biosynthetic process,,0.02,0.008,0.005
+positive regulation of cellular response to oxidative stress,,0.02,0.008,0.005
+sphingosine hydroxylase activity,,0.02,0.008,0.005
+phosphorelay signal transduction system,,0.02,0.008,0.005
+sedoheptulose-7-phosphate:D-glyceraldehyde-3-phosphate glyceronetransferase activity,,0.02,0.008,0.005
+endoplasmic reticulum lumen,,0.02,0.008,0.005
+regulation of conjugation with cellular fusion by regulation of transcription from RNA polymerase II promoter,,0.02,0.008,0.005
+"proteasome regulatory particle, base subcomplex",,0.02,0.008,0.005
+nucleoside-triphosphatase activity,,0.02,0.008,0.005
+protein deglutathionylation,,0.02,0.008,0.005
+dolichyl diphosphate biosynthetic process,,0.02,0.008,0.005
+core mediator complex,,0.02,0.008,0.005
+iron ion transmembrane transporter activity,,0.02,0.008,0.005
+C-5 sterol desaturase activity,,0.02,0.008,0.005
+UDP-N-acetylglucosamine-dolichyl-phosphate N-acetylglucosaminephosphotransferase activity,,0.02,0.008,0.005
+aromatic amino acid family biosynthetic process,,0.02,0.008,0.005
+positive regulation of filamentous growth of a population of unicellular organisms in response to biotic stimulus,,0.02,0.008,0.005
+"vacuole fusion, non-autophagic",,0.02,0.008,0.005
+antioxidant activity,,0.02,0.008,0.005
+iron-sulfur cluster carrier activity,,0.02,0.008,0.005
+riboflavin binding,,0.02,0.008,0.005
+sphingolipid delta-4 desaturase activity,,0.02,0.008,0.005
+chronological cell aging,,0.02,0.008,0.005
+disulfide oxidoreductase activity,,0.02,0.008,0.005
+dihydrofolate synthase activity,,0.02,0.008,0.005
+mitochondrial processing peptidase complex,,0.02,0.008,0.005
+positive regulation of transcription from RNA polymerase II promoter in response to arsenic-containing substance,,0.02,0.008,0.005
+L-methionine salvage from methionine sulphoxide,,0.02,0.008,0.005
+TFIIH-class transcription factor complex binding,,0.02,0.008,0.005
+autophagosome assembly,,0.02,0.008,0.005
+regulation of protein complex assembly,,0.02,0.008,0.005
+protein maturation by [4Fe-4S] cluster transfer,,0.02,0.008,0.005
+riboflavin biosynthetic process,,0.02,0.008,0.005
+endoplasmic reticulum membrane,,0.02,0.008,0.005
+tRNA wobble uridine modification,,0.02,0.008,0.005
+transcriptional start site selection at RNA polymerase II promoter,,0.02,0.008,0.005
+regulation of phosphoprotein phosphatase activity,,0.02,0.008,0.005
+protein homooligomerization,,0.02,0.008,0.005
+carbonyl reductase (NADPH) activity,,0.02,0.008,0.005
+regulation of DNA repair,,0.02,0.008,0.005
+dephosphorylation of RNA polymerase II C-terminal domain,,0.02,0.008,0.005
+3-deoxy-7-phosphoheptulonate synthase activity,,0.02,0.008,0.005
+cellular metabolic process,,0.02,0.008,0.005
+sterol 24-C-methyltransferase activity,,0.02,0.008,0.005
+phosphorelay response regulator activity,,0.02,0.008,0.005
+proteasome regulatory particle,,0.02,0.008,0.005
+protein targeting to mitochondrion,,0.02,0.008,0.005
+positive regulation of transcription elongation from RNA polymerase II promoter,,0.02,0.008,0.005
+glucose-6-phosphate dehydrogenase activity,,0.02,0.008,0.005
+invasive growth in response to glucose limitation,,0.02,0.008,0.005
+iron import into the mitochondrion,,0.02,0.008,0.005
+"pentose-phosphate shunt, oxidative branch",,0.02,0.008,0.005
+phospholipid biosynthetic process,,0.02,0.008,0.005
+[2Fe-2S] cluster assembly,,0.02,0.008,0.005
+ferrochelatase activity,,0.02,0.008,0.005
+nucleotide-activated protein kinase complex,,0.02,0.008,0.005
+protein processing involved in protein targeting to mitochondrion,,0.02,0.008,0.005
+glycerol ether metabolic process,,0.02,0.008,0.005
+chromosome segregation,,0.02,0.008,0.005
+biotin biosynthetic process,,0.02,0.008,0.005
+ascospore wall assembly,,0.02,0.008,0.005
+riboflavin synthase complex,,0.02,0.008,0.005
+vacuole inheritance,,0.02,0.008,0.005
+phospho-N-acetylmuramoyl-pentapeptide-transferase activity,,0.02,0.008,0.005
+glycerol-3-phosphate O-acyltransferase activity,,0.02,0.008,0.005
+"6,7-dimethyl-8-ribityllumazine synthase activity",,0.02,0.008,0.005
+"retrograde vesicle-mediated transport, Golgi to endoplasmic reticulum",,0.02,0.008,0.005
+cytochrome c-heme linkage,,0.02,0.008,0.005
+ion channel activity,,0.02,0.008,0.005
+cellular response to glucose starvation,,0.02,0.008,0.005
+RNA splicing,,0.02,0.008,0.005
+UDP-N-acetylglucosamine transferase complex,,0.02,0.008,0.005
+nucleic acid binding,,,,0.029
+regulation of exit from mitosis,,0.02,0.008,
+UGG codon-amino acid adaptor activity,,0.02,0.008,
+regulation of protein serine/threonine phosphatase activity,,0.02,0.008,
+positive regulation of exit from mitosis,,0.02,0.008,
+cysteine-type endopeptidase activity,,0.02,0.008,
+regulation of mitotic spindle elongation,,0.02,0.008,
+spindle,,0.02,0.008,
+transcription factor TFIIF complex,,0.02,0.008,
+mitotic sister chromatid segregation,,0.02,0.008,
+proteolysis,,0.02,0.008,
+negative regulation of phosphoprotein phosphatase activity,,0.02,0.008,
+protein phosphatase activator activity,,0.02,0.008,
+transmembrane transport,,,,0.024
+membrane,,,,0.024
+actin cortical patch,,,,0.019
+translation,,,,0.019
+magnesium ion binding,,,,0.019
+cellular bud tip,,,,0.019
+protein tyrosine kinase activity,,,,0.019
+structural constituent of ribosome,,,,0.019
+cellular bud neck,,,,0.015
+regulation of fungal-type cell wall organization,,,,0.015
+single-species biofilm formation on inanimate substrate,,,,0.015
+"transferase activity, transferring acyl groups other than amino-acyl groups",,,,0.015
+ATPase activity,,,,0.015
+catalytic activity,,,,0.015
+fungal-type vacuole membrane,,,,0.015
+thiamine pyrophosphate binding,,,,0.015
+protein serine/threonine kinase activity,,,,0.015
+GTP binding,,,,0.015
+RNA binding,,,,0.015
+mating projection tip,,,,0.015
+actin binding,,,,0.01
+termination of RNA polymerase II transcription,,,,0.01
+cytosolic small ribosomal subunit,,,,0.01
+DNA repair,,,,0.01
+ATP-dependent chromatin remodeling,,,,0.01
+mRNA binding,,,,0.01
+NAD binding,,,,0.01
+incipient cellular bud site,,,,0.01
+GTPase activator activity,,,,0.01
+structural constituent of cell wall,,,,0.01
+late endosome to vacuole transport,,,,0.01
+tRNA methylation,,,,0.01
+fungal-type cell wall biogenesis,,,,0.01
+ATP export,,,,0.01
+ATPase-coupled xenobiotic transmembrane transporter activity,,,,0.01
+regulation of DNA methylation,,,,0.01
+drug export,,,,0.01
+filamentous growth of a population of unicellular organisms in response to neutral pH,,,,0.01
+double-strand break repair via nonhomologous end joining,,,,0.01
+small GTPase mediated signal transduction,,,,0.01
+termination of RNA polymerase I transcription,,,,0.01
+protein tyrosine phosphatase activity,,,,0.01
+actin cortical patch localization,,,,0.01
+conidiophore development,,,,0.01
+protein kinase activity,,,,0.01
+carbonate dehydratase activity,,,,0.01
+integral component of mitochondrial inner membrane,,,,0.01
+transcription coactivator activity,,,,0.01
+nucleolar chromatin,,,,0.01
+cellular response to heat,,,,0.01
+one-carbon metabolic process,,,,0.01
+L-phenylalanine catabolic process,,,,0.01
+tryptophan catabolic process,,,,0.01
+thiol-dependent ubiquitin-specific protease activity,,,,0.01
+nuclear envelope,,,,0.01
+sterol transport,,,,0.01
+"cleavage in ITS2 between 5.8S rRNA and LSU-rRNA of tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",,,,0.01
+adhesion of symbiont to host,,,,0.01
+protein targeting to vacuole,,,,0.01
+nucleosome disassembly,,,,0.01
+endocytosis,,,,0.01
+mitochondrial genome maintenance,,,,0.01
+endoplasmic reticulum unfolded protein response,,,,0.01
+branched-chain amino acid biosynthetic process,,,,0.01
+protein transport to vacuole involved in ubiquitin-dependent protein catabolic process via the multivesicular body sorting pathway,,,,0.01
+endosome,,,,0.01
+interaction with host,,,,0.01
+nucleosome binding,,,,0.01
+aromatic amino acid family catabolic process to alcohol via Ehrlich pathway,,,,0.01
+regulation of arginine metabolic process,,,,0.01
+prospore membrane,,,,0.01
+sporocarp development involved in sexual reproduction,,,,0.01
+syncytium formation by plasma membrane fusion,,,,0.01
+"protein binding, bridging",,,,0.01
+chromatin binding,,,,0.01
+double-strand break repair via homologous recombination,,,,0.01
+adenosylhomocysteinase activity,,,,0.005
+homocitrate synthase activity,,,,0.005
+nucleobase-containing compound transport,,,,0.005
+"preribosome, small subunit precursor",,,,0.005
+phenylpyruvate decarboxylase activity,,,,0.005
+positive regulation of mitotic actomyosin contractile ring assembly,,,,0.005
+azole transport,,,,0.005
+cyclin binding,,,,0.005
+guanylate kinase activity,,,,0.005
+"maturation of SSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",,,,0.005
+TIM22 mitochondrial import inner membrane insertion complex,,,,0.005
+"transferase activity, transferring glycosyl groups",,,,0.005
+phosphoserine phosphatase activity,,,,0.005
+protein deubiquitination,,,,0.005
+phosphoribosyl-AMP cyclohydrolase activity,,,,0.005
+tRNA (uracil) methyltransferase activity,,,,0.005
+single-stranded 3'-5' DNA helicase activity,,,,0.005
+pseudohyphal growth,,,,0.005
+UDP-N-acetylglucosamine biosynthetic process,,,,0.005
+ubiquitin protein ligase binding,,,,0.005
+SWI/SNF complex,,,,0.005
+reactive oxygen species metabolic process,,,,0.005
+actin filament,,,,0.005
+regulation of growth rate,,,,0.005
+positive regulation of fatty acid beta-oxidation by positive regulation of transcription from RNA polymerase II promoter,,,,0.005
+cellular response to lithium ion,,,,0.005
+histidine biosynthetic process,,,,0.005
+isopropylmalate transport,,,,0.005
+cellular carbohydrate metabolic process,,,,0.005
+rRNA processing,,,,0.005
+"inositol-1,4,5-trisphosphate 3-kinase activity",,,,0.005
+positive regulation of microtubule polymerization,,,,0.005
+regulation of single-species biofilm formation on inanimate substrate,,,,0.005
+adenine salvage,,,,0.005
+metabolic process,,,,0.005
+carbon catabolite repression of transcription from RNA polymerase II promoter by glucose,,,,0.005
+"alpha-1,6-mannosyltransferase complex",,,,0.005
+CGU codon-amino acid adaptor activity,,,,0.005
+Golgi-associated vesicle,,,,0.005
+cell wall mannoprotein biosynthetic process,,,,0.005
+high molecular weight kininogen binding,,,,0.005
+protein import into mitochondrial intermembrane space,,,,0.005
+positive regulation of cell adhesion involved in single-species biofilm formation,,,,0.005
+alcohol dehydrogenase (NAD) activity,,,,0.005
+chromatin silencing at telomere,,,,0.005
+regulation of protein import into nucleus,,,,0.005
+positive regulation of transcription from RNA polymerase II promoter in response to ethanol,,,,0.005
+proton export across plasma membrane,,,,0.005
+pyrophosphatase activity,,,,0.005
+glucosamine 6-phosphate N-acetyltransferase activity,,,,0.005
+cystathionine beta-lyase activity,,,,0.005
+negative regulation of chromatin silencing,,,,0.005
+galactose catabolic process,,,,0.005
+RNA polymerase II activating transcription factor binding,,,,0.005
+Lys48-specific deubiquitinase activity,,,,0.005
+lyase activity,,,,0.005
+cellular response to carbon dioxide,,,,0.005
+transcription factor TFIIA complex,,,,0.005
+protein transport,,,,0.005
+cell-matrix adhesion,,,,0.005
+cellular response to DNA damage stimulus,,,,0.005
+regulation of Rho protein signal transduction,,,,0.005
+actin cortical patch assembly,,,,0.005
+Mcs4 RR-MAPKKK complex,,,,0.005
+nucleosome assembly,,,,0.005
+cellular response to anoxia,,,,0.005
+protein insertion into mitochondrial inner membrane,,,,0.005
+phospholipid binding,,,,0.005
+"alpha-1,6-mannosyltransferase activity",,,,0.005
+isopropylmalate transmembrane transporter activity,,,,0.005
+amino acid transmembrane transporter activity,,,,0.005
+single-stranded DNA binding,,,,0.005
+hyphal septin ring,,,,0.005
+"calcium transmembrane transporter activity, phosphorylative mechanism",,,,0.005
+"phosphatidylinositol-4,5-bisphosphate binding",,,,0.005
+sterol transporter activity,,,,0.005
+protein localization to chromosome,,,,0.005
+detection of oxidative stress,,,,0.005
+"DNA-binding transcription repressor activity, RNA polymerase II-specific",,,,0.005
+inositol tetrakisphosphate 3-kinase activity,,,,0.005
+non-membrane spanning protein tyrosine phosphatase activity,,,,0.005
+protein serine/threonine phosphatase activity,,,,0.005
+conjugation with cellular fusion,,,,0.005
+branched-chain amino acid catabolic process to alcohol via Ehrlich pathway,,,,0.005
+Isw1a complex,,,,0.005
+UUG codon-amino acid adaptor activity,,,,0.005
+peptidyl-lysine modification to peptidyl-hypusine,,,,0.005
+nitrogen utilization,,,,0.005
+sulfate transport,,,,0.005
+mitochondrial nucleoid,,,,0.005
+double-stranded DNA binding,,,,0.005
+DNA translocase activity,,,,0.005
+diphthine methylesterase activity,,,,0.005
+response to osmotic stress,,,,0.005
+cellular birth scar,,,,0.005
+tRNA (cytosine-3-)-methyltransferase activity,,,,0.005
+regulation of glycogen biosynthetic process,,,,0.005
+chaperone binding,,,,0.005
+negative regulation of error-prone translesion synthesis,,,,0.005
+transketolase activity,,,,0.005
+cellular amino acid metabolic process,,,,0.005
+ubiquitin-dependent protein catabolic process,,,,0.005
+regulation of transcriptional start site selection at RNA polymerase II promoter,,,,0.005
+cysteine-S-conjugate beta-lyase activity,,,,0.005
+positive regulation of peroxisome organization by positive regulation of transcription from RNA polymerase II promoter,,,,0.005
+regulation of intracellular pH,,,,0.005
+mitotic DNA replication,,,,0.005
+cell death in response to hydrogen peroxide,,,,0.005
+MAP kinase activity,,,,0.005
+small ribosomal subunit rRNA binding,,,,0.005
+mitochondrion organization,,,,0.005
+"transcription, DNA-templated",,,,0.005
+"termination of RNA polymerase II transcription, poly(A)-coupled",,,,0.005
+citrate metabolic process,,,,0.005
+sulfate transmembrane transporter activity,,,,0.005
+DNA-(apurinic or apyrimidinic site) endonuclease activity,,,,0.005
+positive regulation of endocytosis,,,,0.005
+kinase regulator activity,,,,0.005
+negative regulation of cAMP-mediated signaling,,,,0.005
+endopeptidase activity,,,,0.005
+ascospore-type prospore membrane assembly,,,,0.005
+cellular respiration,,,,0.005
+succinate dehydrogenase (ubiquinone) activity,,,,0.005
+"inositol-1,3,4,5,6-pentakisphosphate kinase activity",,,,0.005
+nuclear periphery,,,,0.005
+MAPK cascade,,,,0.005
+negative regulation of cytoplasmic translation,,,,0.005
+protein processing,,,,0.005
+establishment of cell polarity,,,,0.005
+filamentous growth of a population of unicellular organisms in response to pH,,,,0.005
+mRNA cleavage and polyadenylation specificity factor complex,,,,0.005
+chromatin assembly or disassembly,,,,0.005
+positive regulation of stress-activated MAPK cascade,,,,0.005
+D-xylose catabolic process,,,,0.005
+Rho guanyl-nucleotide exchange factor activity,,,,0.005
+glycine biosynthetic process,,,,0.005
+protein glycosylation,,,,0.005
+nucleosome mobilization,,,,0.005
+dihydrofolate reductase activity,,,,0.005
+leucine catabolic process,,,,0.005
+AUU codon-amino acid adaptor activity,,,,0.005
+negative cofactor 2 complex,,,,0.005
+inositol phosphoceramide metabolic process,,,,0.005
+"proton-exporting ATPase activity, phosphorylative mechanism",,,,0.005
+pyruvate metabolic process,,,,0.005
+integral component of fungal-type vacuolar membrane,,,,0.005
+fluconazole transport,,,,0.005
+activation of GTPase activity,,,,0.005
+cell wall integrity MAPK cascade,,,,0.005
+telomere maintenance,,,,0.005
+"inositol-1,4,5-trisphosphate 6-kinase activity",,,,0.005
+inositol phosphate biosynthetic process,,,,0.005
+citrate (Si)-synthase activity,,,,0.005
+single-stranded RNA binding,,,,0.005
+response to endoplasmic reticulum stress,,,,0.005
+helicase activity,,,,0.005
+O-acyltransferase activity,,,,0.005
+oxaloacetate transmembrane transporter activity,,,,0.005
+tryptophan biosynthetic process,,,,0.005
+IRE1-mediated unfolded protein response,,,,0.005
+ubiquitin binding,,,,0.005
+MCM complex,,,,0.005
+DNA protection,,,,0.005
+glycolytic process,,,,0.005
+transsulfuration,,,,0.005
+cellular calcium ion homeostasis,,,,0.005
+phosphatidylinositol phosphorylation,,,,0.005
+peptidyl-serine phosphorylation,,,,0.005
+negative regulation of cellular response to drug,,,,0.005
+piecemeal microautophagy of the nucleus,,,,0.005
+nucleotide biosynthetic process,,,,0.005
+phosphatase activity,,,,0.005
+positive regulation of catalytic activity,,,,0.005
+induction by symbiont of host defense response,,,,0.005
+GTPase activity,,,,0.005
+"negative regulation of transcription, DNA-templated",,,,0.005
+protein import into nucleus,,,,0.005
+regulation of cell shape,,,,0.005
+histone binding,,,,0.005
+i-AAA complex,,,,0.005
+fungal-type vacuole,,,,0.005
+deoxyhypusine monooxygenase activity,,,,0.005
+positive regulation of signal transduction,,,,0.005
+AT DNA binding,,,,0.005
+RSC-type complex,,,,0.005
+adenine phosphoribosyltransferase activity,,,,0.005
+transcription corepressor activity,,,,0.005
+Arp2/3 complex binding,,,,0.005
+alditol:NADP+ 1-oxidoreductase activity,,,,0.005
+mRNA 3'-end processing,,,,0.005
+ATP-dependent peptidase activity,,,,0.005
+microtubule cytoskeleton organization,,,,0.005
+vesicle-mediated transport,,,,0.005
+"nuclear chromosome, telomeric region",,,,0.005
+tRNA pseudouridine synthesis,,,,0.005
+cleistothecium development,,,,0.005
+snoRNA transcription,,,,0.005
+filamentous growth of a population of unicellular organisms in response to chemical stimulus,,,,0.005
+heme transport,,,,0.005
+small molecule sensor activity,,,,0.005
+Isw1b complex,,,,0.005
+positive regulation of transcription from RNA polymerase II promoter by oleic acid,,,,0.005
+glycogen biosynthetic process,,,,0.005
+inositol tetrakisphosphate 6-kinase activity,,,,0.005
+"amylo-alpha-1,6-glucosidase activity",,,,0.005
+valine biosynthetic process,,,,0.005
+chromatin silencing at centromere,,,,0.005
+ethanol biosynthetic process involved in glucose fermentation to ethanol,,,,0.005
+3'-5' DNA/RNA helicase activity,,,,0.005
+AAG codon-amino acid adaptor activity,,,,0.005
+response to temperature stimulus,,,,0.005
+ketol-acid reductoisomerase activity,,,,0.005
+glycerophospholipid biosynthetic process,,,,0.005
+donor selection,,,,0.005
+lysine biosynthetic process via aminoadipic acid,,,,0.005
+L-serine biosynthetic process,,,,0.005
+ATP biosynthetic process,,,,0.005
+mitochondrial respiratory chain complex II assembly,,,,0.005
+chromatin organization,,,,0.005
+cholesterol binding,,,,0.005
+cell adhesion,,,,0.005
+peroxisome organization,,,,0.005
+actin filament binding,,,,0.005
+methionine catabolic process to 3-methylthiopropanol,,,,0.005
+histidinol dehydrogenase activity,,,,0.005
+response to hydroperoxide,,,,0.005
+protein folding in endoplasmic reticulum,,,,0.005
+transcription by RNA polymerase I,,,,0.005
+1-acylglycerophosphocholine O-acyltransferase activity,,,,0.005
+intra-Golgi vesicle-mediated transport,,,,0.005
+actin filament bundle assembly,,,,0.005
+protein kinase A catalytic subunit binding,,,,0.005
+"preribosome, large subunit precursor",,,,0.005
+glutamine biosynthetic process,,,,0.005
+tricarboxylic acid cycle,,,,0.005
+glutamate-ammonia ligase activity,,,,0.005
+establishment of protein-containing complex localization to telomere,,,,0.005
+actin filament bundle,,,,0.005
+TBP-class protein binding,,,,0.005
+ammonia assimilation cycle,,,,0.005
+cell cycle,,,,0.005
+FAD metabolic process,,,,0.005
+sister chromatid cohesion,,,,0.005
+NADPH dehydrogenase activity,,,,0.005
+TFIID-class transcription factor complex binding,,,,0.005
+phosphatidylcholine biosynthetic process,,,,0.005
+amino acid catabolic process to alcohol via Ehrlich pathway,,,,0.005
+carbon utilization,,,,0.005
+agglutination involved in conjugation with cellular fusion,,,,0.005
+polynucleotide 5'-hydroxyl-kinase activity,,,,0.005
+negative regulation of cell aging,,,,0.005
+ER to Golgi ceramide transport,,,,0.005
+NADPH-hemoprotein reductase activity,,,,0.005
+methionine biosynthetic process,,,,0.005
+ribosome binding,,,,0.005
+pre-mRNA cleavage required for polyadenylation,,,,0.005
+4-alpha-glucanotransferase activity,,,,0.005
+D-xylose:NADP reductase activity,,,,0.005
+response to acidic pH,,,,0.005
+"termination of RNA polymerase II transcription, exosome-dependent",,,,0.005
+MCM core complex,,,,0.005
+laminin binding,,,,0.005
+ubiquitinyl hydrolase activity,,,,0.005
+malonate(1-) transmembrane transporter activity,,,,0.005
+regulation of (1-&gt;6)-beta-D-glucan biosynthetic process,,,,0.005
+positive regulation of division septum assembly,,,,0.005
+"DNA-templated transcription, elongation",,,,0.005
+extracellular matrix binding,,,,0.005
+regulation of proteasome assembly,,,,0.005
+negative regulation of Arp2/3 complex-mediated actin nucleation,,,,0.005
+regulation of phenotypic switching,,,,0.005
+cell cortex of cell tip,,,,0.005
+fatty acid alpha-hydroxylase activity,,,,0.005
+thiol-dependent ubiquitinyl hydrolase activity,,,,0.005
+fibronectin binding,,,,0.005
+"8-oxo-7,8-dihydroguanosine triphosphate pyrophosphatase activity",,,,0.005
+chaperone-mediated protein folding,,,,0.005
+triglyceride metabolic process,,,,0.005
+nucleoside metabolic process,,,,0.005
+enzyme activator activity,,,,0.005
+actin filament organization,,,,0.005
+histone displacement,,,,0.005
+methylglyoxal reductase (NADH-dependent) activity,,,,0.005
+negative regulation of glycogen biosynthetic process,,,,0.005
+establishment of mitochondrion localization,,,,0.005
+regulation of cell wall (1-&gt;3)-beta-D-glucan biosynthetic process,,,,0.005
+ESCRT III complex,,,,0.005
+acetolactate synthase complex,,,,0.005
+positive regulation of bipolar cell growth,,,,0.005
+cell tip,,,,0.005
+spindle pole body duplication,,,,0.005
+regulation of gluconeogenesis,,,,0.005
+positive regulation of calcium-mediated signaling,,,,0.005
+NADPH binding,,,,0.005
+S-adenosylhomocysteine catabolic process,,,,0.005
+endomembrane system,,,,0.005
+positive regulation of transcription from RNA polymerase II promoter involved in cellular response to chemical stimulus,,,,0.005
+heterochromatin maintenance involved in chromatin silencing,,,,0.005
+GMP metabolic process,,,,0.005
+exocytosis,,,,0.005
+DNA replication initiation,,,,0.005
+rRNA export from nucleus,,,,0.005
+mRNA catabolic process,,,,0.005
+cytosolic large ribosomal subunit,,,,0.005
+regulation of nucleosome density,,,,0.005
+cell cortex,,,,0.005
+TFIIB-class transcription factor binding,,,,0.005
+free ubiquitin chain depolymerization,,,,0.005
+protein K63-linked deubiquitination,,,,0.005
+positive regulation of cell-substrate adhesion,,,,0.005
+perinucleolar compartment,,,,0.005
+DNA replication preinitiation complex,,,,0.005
+tetrahydrofolate biosynthetic process,,,,0.005
+DNA replication-independent nucleosome assembly,,,,0.005
+telomeric DNA binding,,,,0.005
+oxaloacetate transport,,,,0.005
+phosphoprotein phosphatase activity,,,,0.005
+succinate dehydrogenase activity,,,,0.005
+carboxy-lyase activity,,,,0.005
+arabinose catabolic process,,,,0.005
+protein maturation,,,,0.005
+negative regulation of histone exchange,,,,0.005
+peptidyl-diphthamide biosynthetic process from peptidyl-histidine,,,,0.005
+GDP biosynthetic process,,,,0.005
+protein heterodimerization activity,,,,0.005
+division septum,,,,0.005
+calcium ion transport,,,,0.005
+protein import into mitochondrial matrix,,,,0.005
+polysome,,,,0.005
+phosphopyruvate hydratase complex,,,,0.005
+positive regulation of ethanol catabolic process by positive regulation of transcription from RNA polymerase II promoter,,,,0.005
+intralumenal vesicle formation,,,,0.005
+phosphoribosyl-ATP diphosphatase activity,,,,0.005
+nuclear pericentric heterochromatin,,,,0.005
+budding cell bud growth,,,,0.005
+cytoplasmic side of plasma membrane,,,,0.005
+dihydrofolate metabolic process,,,,0.005
+"chromosome, centromeric region",,,,0.005
+RNA polymerase II CTD heptapeptide repeat phosphatase activity,,,,0.005
+regulation of chromatin organization,,,,0.005
+actin filament debranching,,,,0.005
+transcription antitermination,,,,0.005
+ATPase activator activity,,,,0.005
+proteasome storage granule assembly,,,,0.005
+phosphopyruvate hydratase activity,,,,0.005
+'de novo' L-methionine biosynthetic process,,,,0.005
+pseudouridine synthase activity,,,,0.005
+phosphatidylinositol 3-kinase activity,,,,0.005
+intermediate layer of spindle pole body,,,,0.005
+cortical endoplasmic reticulum,,,,0.005
+response to xenobiotic stimulus,,,,0.005
+structural constituent of cytoskeleton,,,,0.005
+core promoter binding,,,,0.005
+glycogen catabolic process,,,,0.005
+Arp2/3 complex-mediated actin nucleation,,,,0.005
+protein stabilization,,,,0.005
+rDNA binding,,,,0.005
+calcium ion transmembrane transport,,,,0.005
+membrane protein proteolysis,,,,0.005
+pyruvate decarboxylase activity,,,,0.005
+nuclear telomeric heterochromatin,,,,0.005
+endocytic recycling,,,,0.005
+Arp2/3 protein complex,,,,0.005
+positive regulation of calcium ion import across plasma membrane,,,,0.005
+ascospore-type prospore assembly,,,,0.005
+ribosome,,,,0.005
+cellular response to pH,,,,0.005
+drug binding,,,,0.005
+telomerase RNA binding,,,,0.005
+phenotypic switching,,,,0.005
+ESCRT-0 complex,,,,0.005
+branched-chain-2-oxoacid decarboxylase activity,,,,0.005
+regulation of gene expression,,,,0.005
+regulation of DNA-dependent DNA replication initiation,,,,0.005
+Ku70:Ku80 complex,,,,0.005
+anthranilate phosphoribosyltransferase activity,,,,0.005
+amino acid transport,,,,0.005
+protein K11-linked deubiquitination,,,,0.005
+isoleucine biosynthetic process,,,,0.005
+maintenance of cell polarity,,,,0.005
+DNA damage checkpoint,,,,0.005
+positive regulation of TORC1 signaling,,,,0.005
+ribosomal small subunit export from nucleus,,,,0.005
+D-xylose metabolic process,,,,0.005
+lipid binding,,,,0.005
+1-acylglycerol-3-phosphate O-acyltransferase activity,,,,0.005
+positive regulation of cell wall organization or biogenesis,,,,0.005
+proton binding,,,,0.005
+establishment or maintenance of cell polarity regulating cell shape,,,,0.005
+central plaque of spindle pole body,,,,0.005
+regulation of phospholipid translocation,,,,0.005
+sterol binding,,,,0.005
+regulation of filamentous growth of a population of unicellular organisms in response to biotic stimulus,,,,0.005
+mannosyltransferase activity,,,,0.005
+"regulation of vacuole fusion, non-autophagic",,,,0.005
+mRNA pseudouridine synthesis,,,,0.005
+acetolactate synthase activity,,,,0.005
+nitrogen compound metabolic process,,,,0.005
+protein quality control for misfolded or incompletely synthesized proteins,,,,0.005
+glyceraldehyde-3-phosphate dehydrogenase (NAD+) (phosphorylating) activity,,,,0.005
+"mitochondrial respiratory chain complex II, succinate dehydrogenase complex (ubiquinone)",,,,0.005
+autophagy of peroxisome,,,,0.005
+fumarate reductase (NADH) activity,,,,0.005
+protein dephosphorylation,,,,0.005
+chromatin remodeling,,,,0.005
