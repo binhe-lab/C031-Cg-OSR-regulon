@@ -1,0 +1,9 @@
+GEO accession,Dataset Type,Notes
+GSE42536,Microarray,
+GSE68006,Microarray,
+GSE26169,Microarray,
+GSE4654,Mircroarray,yml007 is yap1
+https://www.yeastgenome.org/reference/S000145602,ChIP-ChIP,"Says ChIp-ChIp for Yap1 but the download link is at the bottom of the page, GEO not available it seems, no ChIP-seq for Yap1 here"
+https://www.yeastgenome.org/reference/S000114654,ChIP-ChIP,"Like above, no GEO availabe it seems"
+https://academic.oup.com/nar/article/41/22/10124/2437416#supplementary-data,ChIp-qPCR,Dataset link found at the bottom of page
+
