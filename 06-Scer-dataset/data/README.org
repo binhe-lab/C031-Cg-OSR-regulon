@@ -1,0 +1,17 @@
+* Files
+| File                          | Description                                                  | Source    |
+|-------------------------------+--------------------------------------------------------------+-----------|
+| 20190930-data-source-list.csv | table of identified datasets and source                      | Zoheb/Bin |
+| YAP1_targets.txt              | list of putative Yap1 targets, based on high-throughput data | SGD       |
+
+* Notes
+** 2019-09-30 Reading papers
+From SGD gene page / regulation, I identified the following papers and below are notes for them
+- Cohen BA, et al. (2002) PMID:12006656
+  - 
+- Hu Z, et al. (2007) PMID:17417638
+- MacIsaac KD, et al. (2006) PMID:16522208
+- Venters BJ, et al. (2011) PMID:21329885
+- Lee SK, et al. (2013) PMID:24005039
+- Nguyên DT, et al. (2001) PMID:11056165
+
